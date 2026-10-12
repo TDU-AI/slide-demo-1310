@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slide 05 — 0 bài bị mất</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="deck/deck.css" rel="stylesheet">
+<link href="deck/theme.css" rel="stylesheet">
+<link href="deck/tdu-v2.css" rel="stylesheet">
+<style>
+/* =========================================================
+   SLIDE 5 — ĐÃ KIỂM CHỨNG · bản đồ S4 "số tràn khung" · 2 NHỊP · WOW 3 · cảm xúc: ĐỈNH
+   Neo: số 0 khổng lồ ("bài bị mất") trong cột tối bên trái của ảnh.
+   Nhịp 1: 150 chấm sáng (150 bài nộp) chảy theo vệt đèn của ảnh vào thẻ "Bài nộp đã nhận", bộ đếm lên 150/150.
+   Nhịp 2: ba số đo thật hiện trong thẻ. Nguồn: docs/load_test_tien_staging.md (25/08/2026) — kịch bản "150 ramp 60s"
+   trên máy chủ chạy thử: 0 lỗi, 0 mất bài, p95 nộp bài 1,72 s; 0 mất bài ở cả 8 kịch bản (5 tiền-staging + 3 staging).
+   Ảnh s5: cầu kính nhìn ra đường cao tốc về đêm — cột tối x 0–620, vệt đèn chạy ngang bên phải ở y ≈ 560–640.
+   ========================================================= */
+.scrim{background:
+  linear-gradient(90deg,rgba(var(--bg-rgb),.55) 0%,rgba(var(--bg-rgb),.35) 30%,rgba(var(--bg-rgb),0) 42%),
+  linear-gradient(180deg,rgba(var(--bg-rgb),.35) 0%,rgba(var(--bg-rgb),0) 24%,rgba(var(--bg-rgb),0) 82%,rgba(var(--bg-rgb),.55) 100%)}
+.copy{top:156px;width:600px}
+h1{font-size:62px;margin-top:26px;line-height:1.14}
+.neo{position:absolute;left:104px;top:376px;z-index:2;display:flex;flex-direction:column}
+.neo .so{font-size:420px;font-weight:300;line-height:.92;letter-spacing:-.04em;font-variant-numeric:tabular-nums;
+  background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  padding:.06em .04em .02em;margin:-.06em 0 -.02em}
+.neo .nhan-so{margin:-18px 0 0 30px;font-size:56px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+
+/* dòng chảy 150 bài nộp (canvas, dưới thẻ) */
+#dongChay{position:absolute;inset:0;z-index:2;pointer-events:none}
+
+/* thẻ "Bài nộp đã nhận" (E3) */
+.the-tai{position:absolute;left:676px;top:300px;width:572px;z-index:3;padding:0 0 26px;overflow:hidden;border-radius:calc(22px * var(--round));
+  background:rgba(var(--surface-rgb),.95);border:1px solid rgba(var(--fg-rgb),.22);box-shadow:var(--x-elev),var(--x-halo)}
+.the-tai .dau{padding:14px 26px;background:rgba(var(--surface-hi-rgb),.96);border-bottom:1px solid var(--glass-line);font-size:19px;font-weight:500;color:var(--muted)}
+.the-tai .than{padding:24px 26px 0}
+.the-tai .nhan-o{font-size:26px;color:var(--muted)}
+.dem{display:flex;align-items:baseline;gap:12px;margin-top:4px}
+.dem b{font-size:104px;font-weight:600;line-height:1.05;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink-strong)}
+.dem span{font-size:40px;font-weight:500;color:var(--muted)}
+.thanh{height:8px;border-radius:999px;background:rgba(var(--fg-rgb),.12);overflow:hidden;margin-top:14px}
+.thanh i{display:block;height:100%;width:0;border-radius:999px;background:var(--accent-hi)}
+.so-do{list-style:none;display:flex;flex-direction:column}
+.so-do li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:0;border-top:1px solid transparent;max-height:0;opacity:0;overflow:hidden;
+  transition:max-height var(--dur-2) var(--ease-out),padding var(--dur-2) var(--ease-out),opacity var(--dur-2) var(--ease-out),border-color var(--dur-2) ease;transition-delay:var(--step-delay,0s)}
+.so-do li.step-on{max-height:90px;padding:14px 0;opacity:1;border-top-color:var(--glass-line)}
+.so-do{margin-top:8px}
+.so-do span{font-size:25px;color:var(--muted);white-space:nowrap}
+.so-do b{font-size:34px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.play .the-tai{animation:theVao var(--dur-3) var(--ease-out) .6s both}
+@keyframes theVao{from{opacity:0;transform:perspective(1600px) translateY(50px) rotateX(8deg)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body data-image="assets/s5.webp,assets/s5.png,assets/s4.webp">
+<div class="stage" id="stage">
+  <div class="bg">
+    <div class="bg-move">
+      <div class="bg-kb" style="--kb-origin:70% 58%">
+        <img id="bgImg" alt="">
+        <video id="bgVid" muted loop playsinline autoplay preload="auto"></video>
+      </div>
+    </div>
+  </div>
+  <div class="scrim"></div><div class="vignette"></div><div class="grain"></div>
+
+  <header class="brand">
+    <div class="org"><img src="assets/logo.png" alt="Logo Trường Đại học Thành Đông"><div class="org-text"><span>TRƯỜNG ĐẠI HỌC</span><strong>THÀNH ĐÔNG</strong></div></div>
+    <span class="vach"></span><span class="ten-cong">Cổng thi trực tuyến</span>
+  </header>
+
+  <section class="copy">
+    <div class="nhan anim" style="--d:1s"><span class="tag">04 · Đã kiểm chứng</span></div>
+    <h1>
+      <span class="mask"><span class="line" style="--d:.5s">Đã thử với</span></span>
+      <span class="mask"><span class="line" style="--d:.62s">150 thí sinh.</span></span>
+    </h1>
+  </section>
+
+  <!-- ĐIỂM NEO: số 0 -->
+  <div class="neo anim" style="--d:.15s" data-qa-group>
+    <span class="so">0</span>
+    <span class="nhan-so">bài bị mất.</span>
+  </div>
+
+  <!-- 150 bài nộp chảy theo vệt đèn vào thẻ (nhịp 1) -->
+  <div id="dongChay" class="fx-layer" data-step="1" data-step-fx="fade"></div>
+
+  <!-- THẺ KẾT QUẢ THỬ TẢI -->
+  <div class="the-tai">
+    <div class="dau" data-qa-meta>Thử tải trên máy chủ chạy thử · 25/08/2026</div>
+    <div class="than">
+      <div class="nhan-o">Bài nộp đã nhận</div>
+      <div class="dem" data-qa-group><b id="daNhan">0</b><span>/ 150</span></div>
+      <div class="thanh"><i id="thanhNhan"></i></div>
+      <ul class="so-do">
+        <li data-step="2" data-step-fx="none"><span>150 thí sinh vào thi trong</span><b>60 giây</b></li>
+        <li data-step="2" data-step-fx="none" style="--step-delay:.1s"><span>95% bài nộp xong trong</span><b>1,72 giây</b></li>
+        <li data-step="2" data-step-fx="none" style="--step-delay:.2s"><span>Kịch bản thử tải không mất bài</span><b>8 / 8</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="shop">Cổng thi trực tuyến · Trường Đại học Thành Đông</div>
+    <div class="so-trang">05 / 09</div>
+  </footer>
+  <div class="ph-badge">Chưa có ảnh nền · thả ảnh vào assets/s5.png</div>
+  <div class="credit">Hình nền tạo bằng AI</div>
+</div>
+<script src="deck/deck.js"></script>
+<script src="deck/fx/fx-core.js"></script>
+<script>
+/* Hiệu ứng riêng của slide: "nopBai" — N chấm sáng chạy theo các làn (đường cong Bézier, toạ độ sân khấu) rồi "rơi" vào thẻ.
+   Màu lấy từ phong cách (FX.rgba), vẽ bằng sprite, giảm chuyển động → hiện ngay kết quả cuối (đủ N). */
+FX.register('nopBai', (el, o, ctx) => {
+  const c = FX.canvas(el);
+  const N = o.n || 150, DI = o.di || 1300, RAI = o.rai || 2900;
+  const r = ctx.rand, lanes = o.lanes;
+  const dots = Array.from({ length: N }, (_, i) => ({ t0: i * RAI / N + r() * 30, l: r.int(0, lanes.length - 1), j: r.range(-6, 6) }));
+  const sp = document.createElement('canvas'); sp.width = sp.height = 48;
+  const g = sp.getContext('2d'), gr = g.createRadialGradient(24, 24, 0, 24, 24, 24);
+  gr.addColorStop(0, FX.rgba('fg', 1)); gr.addColorStop(.18, FX.rgba('accent-hi', .95)); gr.addColorStop(.45, FX.rgba('accent-hi', .35)); gr.addColorStop(1, FX.rgba('accent', 0));
+  g.fillStyle = gr; g.fillRect(0, 0, 48, 48);
+  const lan = FX.rgba('accent-hi', .22);
+  const bez = (L, u) => { const v = 1 - u; return [v*v*v*L[0] + 3*v*v*u*L[2] + 3*v*u*u*L[4] + u*u*u*L[6], v*v*v*L[1] + 3*v*v*u*L[3] + 3*v*u*u*L[5] + u*u*u*L[7]]; };
+  const ease = u => (u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+  let vong = null, da = -1;
+  const bao = k => { if (k !== da) { da = k; if (o.onCount) o.onCount(k, N); } };
+  const ve = t => {
+    c.clear(); let k = 0;
+    c.ctx.lineWidth = 2; c.ctx.strokeStyle = lan;                 // làn chảy mờ: neo mắt cho dòng bài nộp
+    for (const L of lanes) { c.ctx.beginPath(); c.ctx.moveTo(L[0], L[1]); c.ctx.bezierCurveTo(L[2], L[3], L[4], L[5], L[6], L[7]); c.ctx.stroke(); }
+    for (const d of dots) {
+      const u = (t - d.t0) / DI;
+      if (u < 0) continue;
+      if (u >= 1) { k++; continue; }
+      const a = Math.min(1, u * 6, (1 - u) * 8), s = 26 + 12 * Math.sin(u * Math.PI);
+      for (let q = 4; q >= 0; q--) {                       // đuôi: 3 bóng mờ phía sau → đọc ra "đang chạy"
+        const uq = Math.max(0, u - q * .02), [x, y] = bez(lanes[d.l], ease(uq)), sq = s * (1 - q * .16);
+        c.ctx.globalAlpha = a * (q ? .4 / q : 1);
+        c.ctx.drawImage(sp, x - sq / 2, y - sq / 2 + d.j, sq, sq);
+      }
+    }
+    c.ctx.globalAlpha = 1; bao(k);
+    if (k >= N && vong) { vong.stop(); vong = null; }
+  };
+  return {
+    play() { if (vong) vong.stop(); vong = null; da = -1; c.clear(); if (ctx.reduced) { bao(N); return; } vong = FX.loop(t => ve(t)); },
+    reset() { if (vong) vong.stop(); vong = null; c.clear(); da = -1; bao(0); },
+    stop() { if (vong) vong.stop(); c.destroy(); }
+  };
+});
+
+const daNhan = document.getElementById('daNhan'), thanh = document.getElementById('thanhNhan');
+FX.bind(FX.nopBai('#dongChay', {
+  seed: 7,
+  lanes: [[1960, 556, 1660, 566, 1420, 578, 1250, 470], [1960, 584, 1650, 594, 1410, 608, 1250, 540], [1960, 612, 1640, 624, 1400, 640, 1250, 610]],
+  onCount: (k, N) => { daNhan.textContent = k; thanh.style.width = (k / N * 100) + '%'; }
+}), 1);
+</script>
+</body>
+</html>

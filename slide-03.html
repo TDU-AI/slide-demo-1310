@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slide 03 — Thí sinh thi ngay trên điện thoại</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="deck/deck.css" rel="stylesheet">
+<link href="deck/theme.css" rel="stylesheet">
+<link href="deck/tdu-v2.css" rel="stylesheet">
+<link href="deck/dien-thoai-tdu.css" rel="stylesheet">
+<link href="deck/giao-dien-tdu.css" rel="stylesheet">
+<style>
+/* =========================================================
+   SLIDE 3 — HÀNH TRÌNH THÍ SINH · 4 NHỊP BẤM (nhịp nói) · cảm xúc: DÂNG
+   Tiêu đề hiện sẵn; mỗi lần bấm một bước hiện ra (bước đã qua dịu đi) và màn hình điện thoại đổi theo.
+   Ảnh s3: lớp học trống về đêm — tường tối trái (chữ), cửa kính sáng bên phải (điện thoại đứng trước, ánh cửa kính làm quầng sau máy).
+   ========================================================= */
+.scrim{background:
+  linear-gradient(90deg,rgba(var(--bg-rgb),.62) 0%,rgba(var(--bg-rgb),.35) 46%,rgba(var(--bg-rgb),0) 62%),
+  linear-gradient(180deg,rgba(var(--bg-rgb),.3) 0%,rgba(var(--bg-rgb),0) 20%,rgba(var(--bg-rgb),0) 80%,rgba(var(--bg-rgb),.5) 100%)}
+.copy{top:196px;width:1080px}
+h1{font-size:76px;margin-top:30px}
+.nhip{position:absolute;left:var(--margin);top:500px;width:1100px;z-index:2}
+
+.dt-wrap{left:1318px;top:104px;width:418px;height:872px}
+.dt-wrap .device-float{animation:none}
+.play .dt-wrap .device{animation:traiLen 1.2s var(--ease-out) .7s both}
+@keyframes traiLen{from{opacity:0;transform:perspective(1600px) translateY(80px) rotateX(8deg)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body data-image="assets/s3.webp,assets/s3.png,assets/s2.webp">
+<div class="stage" id="stage">
+  <div class="bg">
+    <div class="bg-move">
+      <div class="bg-kb" style="--kb-origin:74% 46%">
+        <img id="bgImg" alt="">
+        <video id="bgVid" muted loop playsinline autoplay preload="auto"></video>
+      </div>
+    </div>
+  </div>
+  <div class="scrim"></div><div class="vignette"></div><div class="grain"></div>
+
+  <header class="brand">
+    <div class="org"><img src="assets/logo.png" alt="Logo Trường Đại học Thành Đông"><div class="org-text"><span>TRƯỜNG ĐẠI HỌC</span><strong>THÀNH ĐÔNG</strong></div></div>
+    <span class="vach"></span><span class="ten-cong">Cổng thi trực tuyến</span>
+  </header>
+
+  <section class="copy">
+    <div class="nhan anim" style="--d:.9s"><span class="tag">02 · Cách thi</span></div>
+    <h1>
+      <span class="mask"><span class="line" style="--d:.2s">Thí sinh thi ngay</span></span>
+      <span class="mask"><span class="line" style="--d:.34s">trên điện thoại.</span></span>
+    </h1>
+  </section>
+
+  <!-- 4 nhịp nói: một bước mỗi lần bấm -->
+  <ol class="nhip">
+    <li data-step="1"><span class="so">01</span><div><b>Quét QR, gõ email nhận điểm</b><small>Mã dự thi tự điền, không cài ứng dụng.</small></div></li>
+    <li data-step="2"><span class="so">02</span><div><b>Làm bài, tự lưu mỗi 30 giây</b><small>Rớt mạng, tải lại trang: bài vẫn còn.</small></div></li>
+    <li data-step="3"><span class="so">03</span><div><b>Nộp xong có điểm trắc nghiệm</b><small>Bài viết: AI chấm 2 lần, độc lập.</small></div></li>
+    <li data-step="4"><span class="so">04</span><div><b>Giáo viên duyệt, điểm về email</b><small>Kèm nhận xét, nút phúc khảo.</small></div></li>
+  </ol>
+
+  <!-- ĐIỆN THOẠI: 4 màn hình thật, đổi theo nhịp -->
+  <div class="device-wrap dt-wrap">
+    <div class="device-float">
+      <div class="device dt" data-qa-ui data-qa-allow-color>
+        <div class="dt-man">
+          <div class="dt-tt"><span>08:41</span><span class="dt-dao"></span>
+            <span class="dt-pin"><svg width="18" height="12" viewBox="0 0 18 12" fill="#141A33"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg width="26" height="13" viewBox="0 0 26 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="3.5" stroke="#141A33" opacity=".45"/><rect x="2.5" y="2.5" width="16" height="8" rx="2" fill="#141A33"/></svg></span></div>
+          <div class="mh-khung">
+
+            <!-- MÀN 1: VÀO THI (các màn 1–3 cố ý ẩn ở trạng thái cuối: data-qa-end) -->
+            <div class="mh hien" data-qa-end="hidden">
+              <div class="v-dau">
+                <div class="v-logo"><img src="assets/logo.png" alt=""></div>
+                <div class="v-truong">TRƯỜNG ĐẠI HỌC THÀNH ĐÔNG</div>
+                <div class="v-ten">Cổng thi trực tuyến</div>
+                <div class="v-phu">Thi và chấm thi tiếng Anh tự động</div>
+              </div>
+              <div class="v-the">
+                <label>Mã dự thi</label>
+                <div class="v-o v-ma">7ZTVL2</div>
+                <div class="v-gy">6 ký tự in trên phiếu dự thi</div>
+                <label>Email nhận kết quả</label>
+                <div class="v-o"><span id="goEmail"></span><i class="v-nhay"></i></div>
+                <div class="v-gy">Điểm và nhận xét bài viết sẽ gửi về địa chỉ này sau khi giáo viên duyệt.</div>
+                <div class="v-nut">Vào thi <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg><i class="cham-nhan" id="nhanVao"></i></div>
+              </div>
+              <ul class="v-luu-y"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Đồng hồ tính từ lần vào thi đầu tiên. Tải lại trang không làm mất giờ.</span></li></ul>
+            </div>
+
+            <!-- MÀN 2: LÀM BÀI -->
+            <div class="mh" data-qa-end="hidden">
+              <div class="dt-dau">
+                <div class="dt-hang"><img src="assets/logo.png" alt="">
+                  <div class="dt-ten"><b>Tiếng Anh cơ bản 1</b><span>Nguyễn Văn A · SBD 0123</span></div>
+                  <div class="dt-gio"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M10 2h4"/></svg><span id="dtGio">18:42</span></div>
+                </div>
+                <div>
+                  <div class="dt-tien"><span>Đã làm <b>13</b>/40 câu</span><span class="dt-luu tot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Đã lưu lúc 08:41</span></div>
+                  <div class="dt-thanh"><i style="width:32.5%"></i></div>
+                </div>
+                <div class="dt-tab"><span class="dang">Nghe<small>5/10</small></span><span>Ngôn ngữ<small>8/10</small></span><span>Đọc<small>0/12</small></span><span>Viết<small>0/8</small></span></div>
+              </div>
+              <div class="dt-than">
+                <h3>I. Phần Nghe</h3>
+                <div class="dt-the">
+                  <div class="dt-nghe"><span>File nghe · Part 1</span><span class="dt-chip">Đã nghe 1/2 lần</span></div>
+                  <div class="dt-play"><span class="dt-nut"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></span>
+                    <div class="dt-chay"><i><b></b></i><span><em style="font-style:normal">0:42</em><em style="font-style:normal">2:15</em></span></div></div>
+                </div>
+                <div class="dt-huong"><b>Part 1.</b> Listen and choose the correct picture (A, B or C).</div>
+                <div class="dt-the">
+                  <div class="dt-cau"><span class="dt-so">Câu 1</span><span>What time does the museum open on Sunday?</span></div>
+                  <div class="dt-chon">
+                    <span><svg width="62" height="62" viewBox="0 0 72 72" fill="none" stroke="#1F2A5E" stroke-linecap="round"><circle cx="36" cy="36" r="30" stroke-width="3" fill="#fff"/><path d="M36 9v4M63 36h-4M36 63v-4M9 36h4" stroke-width="2.5"/><path d="M36 36V14" stroke-width="3"/><path d="M36 36L23 43.5" stroke-width="4.5"/><circle cx="36" cy="36" r="2.5" fill="#1F2A5E" stroke="none"/></svg>A</span>
+                    <span class="chon"><svg width="62" height="62" viewBox="0 0 72 72" fill="none" stroke="#1F2A5E" stroke-linecap="round"><circle cx="36" cy="36" r="30" stroke-width="3" fill="#fff"/><path d="M36 9v4M63 36h-4M36 63v-4M9 36h4" stroke-width="2.5"/><path d="M36 36V58" stroke-width="3"/><path d="M36 36L21.5 32.1" stroke-width="4.5"/><circle cx="36" cy="36" r="2.5" fill="#1F2A5E" stroke="none"/></svg>B<span class="dt-tich"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
+                    <span><svg width="62" height="62" viewBox="0 0 72 72" fill="none" stroke="#1F2A5E" stroke-linecap="round"><circle cx="36" cy="36" r="30" stroke-width="3" fill="#fff"/><path d="M36 9v4M63 36h-4M36 63v-4M9 36h4" stroke-width="2.5"/><path d="M36 36H58" stroke-width="3"/><path d="M36 36L24.1 26.9" stroke-width="4.5"/><circle cx="36" cy="36" r="2.5" fill="#1F2A5E" stroke="none"/></svg>C</span>
+                  </div>
+                </div>
+                <div class="dt-the">
+                  <div class="dt-cau"><span class="dt-so">Câu 2</span><span>How does the woman usually get to work?</span></div>
+                  <div class="dt-chon"><span style="min-height:96px"></span><span style="min-height:96px"></span><span style="min-height:96px"></span></div>
+                </div>
+              </div>
+              <div class="dt-day"><div><b>Còn 27 câu chưa làm</b><small>Bài làm tự lưu 30 giây một lần</small></div><span class="dt-nop">Nộp bài</span></div>
+            </div>
+
+            <!-- MÀN 3: ĐÃ NỘP BÀI -->
+            <div class="mh" data-qa-end="hidden">
+              <div class="k-dau">
+                <div class="k-vong"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+                <div class="k-tieu">Đã nộp bài thành công</div>
+                <div class="k-phu">Nguyễn Văn A · Đề TACB1.1210</div>
+              </div>
+              <div class="k-the">
+                <div class="k-tong"><div><b>Điểm phần máy chấm</b><small>Kết quả sơ bộ</small></div><div class="k-so">6,5<small> / 8</small></div></div>
+                <div class="k-luoi">
+                  <div class="k-o"><span>Nghe</span><b>2,4 <small>/ 3</small></b></div>
+                  <div class="k-o"><span>Ngôn ngữ</span><b>0,8 <small>/ 1</small></b></div>
+                  <div class="k-o"><span>Đọc</span><b>2,5 <small>/ 3</small></b></div>
+                  <div class="k-o"><span>Viết câu</span><b>0,8 <small>/ 1</small></b></div>
+                  <div class="k-o cho"><span>Bài viết</span><b>Đang chấm</b></div>
+                </div>
+              </div>
+              <div class="k-the k-email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
+                <div>Kết quả chính thức sẽ gửi tới <b>ten.cua.ban@gmail.com</b> sau khi giáo viên duyệt.<span class="k-sua">Sửa email</span></div>
+              </div>
+              <div class="k-ve">Về trang chủ</div>
+            </div>
+
+            <!-- MÀN 4: THƯ KẾT QUẢ -->
+            <div class="mh thu">
+              <div class="m-thanh"><span>‹ Hộp thư</span><span aria-hidden="true"><svg width="16" height="4" viewBox="0 0 16 4" fill="currentColor" style="display:block"><circle cx="2" cy="2" r="1.7"/><circle cx="8" cy="2" r="1.7"/><circle cx="14" cy="2" r="1.7"/></svg></span></div>
+              <div class="m-tieu">[TDU] Kết quả bài thi Tiếng Anh cơ bản (TACB1) — Nguyễn Văn A</div>
+              <div class="m-gui"><img src="assets/logo.png" alt=""><div><b>Cổng thi TDU</b><span>tới tôi · 09:15</span></div></div>
+              <div class="m-than">
+                <div class="m-band"><img src="assets/logo.png" alt="">TRƯỜNG ĐẠI HỌC THÀNH ĐÔNG</div>
+                <div class="m-noi">
+                  <p>Chào <b>Nguyễn Văn A</b>,</p>
+                  <p>Kết quả bài thi của bạn (mã đề TACB1.1210):</p>
+                  <table class="m-bang">
+                    <tr><td>Nghe</td><td>2,4 / 3</td></tr>
+                    <tr><td>Trắc nghiệm (Language + Đọc)</td><td>3,3 / 4</td></tr>
+                    <tr><td>Viết (P1 + P2)</td><td>2,0 / 3</td></tr>
+                    <tr class="tong"><td>TỔNG ĐIỂM</td><td>7,7 / 10</td></tr>
+                  </table>
+                  <p><b>Nhận xét phần Viết:</b> Đúng chủ đề, ý mạch lạc; chú ý thì quá khứ của động từ.</p>
+                  <table class="m-loi">
+                    <tr><th>Bạn viết</th><th>Gợi ý sửa</th></tr>
+                    <tr><td>I go</td><td>I went</td></tr>
+                    <tr><td>very interesting</td><td>very interested</td></tr>
+                  </table>
+                  <div class="m-ok">✓ Giáo viên đã rà soát kết quả này.</div>
+                  <div class="m-pk">Yêu cầu phúc khảo bài thi</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="shop">Cổng thi trực tuyến · Trường Đại học Thành Đông</div>
+    <div class="so-trang">03 / 09</div>
+  </footer>
+  <div class="ph-badge">Chưa có ảnh nền · thả ảnh vào assets/s3.png</div>
+  <div class="credit">Hình nền tạo bằng AI</div>
+</div>
+<script src="deck/deck.js"></script>
+<script>
+// Nhịp 0: màn "Vào thi" (mã đã điền sẵn từ QR) · nhịp 1: gõ email + chạm "Vào thi" · nhịp 2: làm bài · nhịp 3: đã nộp · nhịp 4: thư điểm
+const $ = id => document.getElementById(id);
+const dsLi = [...document.querySelectorAll('.nhip li')];
+const dsMh = [...document.querySelectorAll('.mh')];
+const EMAIL = 'ten.cua.ban@gmail.com';
+let phien = 0, giay = 18 * 60 + 42;
+const veGio = () => { $('dtGio').textContent = String(Math.floor(giay / 60)).padStart(2, '0') + ':' + String(giay % 60).padStart(2, '0'); };
+function demLui(p){ if (p !== phien) return; giay = Math.max(0, giay - 1); veGio(); Deck.later(() => demLui(p), 1000); }
+function goChu(el, chu, p, t0, buoc){
+  el.textContent = '';
+  [...chu].forEach((ch, i) => Deck.later(() => { if (p === phien) el.textContent += ch; }, t0 + i * buoc));
+  return t0 + chu.length * buoc;
+}
+Deck.onStep((n, dir) => {
+  const p = ++phien;
+  dsLi.forEach((li, k) => { li.classList.toggle('qua', k < n - 1); li.classList.toggle('dang', k === n - 1); });
+  const i = Math.max(0, n - 1);
+  dsMh.forEach((m, k) => m.classList.toggle('hien', k === i));
+  const email = $('goEmail');
+  if (n === 1 && dir === 1 && !Deck.reduced) {
+    const xong = goChu(email, EMAIL, p, 350, 45);
+    Deck.later(() => { if (p !== phien) return; const g = $('nhanVao'); g.classList.remove('go'); void g.offsetWidth; g.classList.add('go'); }, xong + 350);
+  } else email.textContent = n >= 1 ? EMAIL : '';
+  if (i === 1) { giay = 18 * 60 + 42; veGio(); if (!Deck.reduced) Deck.later(() => demLui(p), 1000); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+/* =========================================================
+   PHONG CÁCH: SaaS nền tối — Dark-Mode SaaS Showcase  (themes/saas-dark · /slide-making v2.0)
+   BẢN RIÊNG CỦA BÀI "Cổng thi trực tuyến TDU — bản v2" (12/10/2026), sửa từ bản trong tủ:
+   - KHÓA MÀU NHẬN DIỆN TDU (brand-lock, style.md mục "Gắn màu nhận diện"): tím chàm → xanh logo #4683BB (khối, nét, quầng);
+     chữ nhấn → xanh băng #8CC8F2; đỏ mặt trời #E2261F chỉ là MỘT chấm cuối tiêu đề bìa (≤ 3 chỗ cả bộ).
+   - FONT: Geist (đúng phong cách; người dùng cho tải 12/10/2026 — fonts/Geist-300-*.woff2, một file biến thiên 300–800 mỗi bộ chữ),
+     dự phòng Be Vietnam Pro. Khung giao diện mô phỏng (điện thoại, màn duyệt bài, hàng đợi email) dùng --font-app = Be Vietnam Pro
+     như trang thi thật (backend/static/tdu.css). Thứ bậc chữ theo saas-dark: tiêu đề 600.
+   DNA: sản phẩm thật dựng bằng code đặt trong một môi trường thật. Ảnh AI là kiến trúc nội thất về đêm;
+        cửa sổ ứng dụng, số liệu bằng code là nhân vật chính. Ít màu, nhiều khoảng trống.
+   Biến thể SÁNG "Phòng họp sáng": thêm data-bien-the="sang" vào thẻ <html> của slide.
+   ========================================================= */
+:root{
+  color-scheme:dark;
+
+  /* Nền — đá phiến đêm (xanh than), nâng khỏi đen tuyền */
+  --bg-rgb:15,18,28;                 /* #0F121C */
+  --stage-bg:#141826;
+  --surface-rgb:24,27,38;            /* #181B26 thẻ, cửa sổ sản phẩm */
+  --surface-hi-rgb:38,42,58;         /* #262A3A ô nổi, thanh tiêu đề cửa sổ */
+  --fg-rgb:255,255,255;
+  --vignette:rgba(6,8,14,.5);
+
+  /* Chữ */
+  --ink:#F7F8FA;
+  --ink-strong:#FFFFFF;
+  --muted-rgb:206,210,224;           /* #CED2E0 ở độ đậm --muted-alpha */
+
+  /* Màu nhấn — XANH LOGO TDU: khối, đường, quầng sáng; chữ nhấn dùng --accent-text (xanh băng) */
+  --accent-rgb:70,131,187;           /* #4683BB — 4,7:1 trên nền (đồ họa ≥ 3 ✓) */
+  --accent-hi-rgb:140,200,242;       /* #8CC8F2 — số đếm, biểu tượng (~10:1) */
+  --accent-grad:linear-gradient(180deg,#FFFFFF 0%,#E2EFFB 48%,#9ACFF5 100%);   /* dòng tiêu đề nhấn: ánh trắng → xanh băng (một họ màu) */
+  --on-accent:#08101F;               /* chữ trên khối xanh (4,6:1) */
+  --accent-2-rgb:70,191,174;         /* #46BFAE bạc hà — chỉ nét 2px / chuỗi dữ liệu thứ hai */
+  --brand-red-rgb:226,38,31;         /* #E2261F đỏ mặt trời trên logo — CHỈ khối/chấm, không làm chữ */
+
+  /* Trạng thái */
+  --ok-rgb:52,211,153;
+  --warn-rgb:251,191,36;
+  --danger-rgb:248,113,113;
+  --live-rgb:52,211,153;
+
+  /* Font — Geist (offline trong fonts/, đủ dấu); dự phòng Be Vietnam Pro */
+  --font-body:"Geist","Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  --font-title:"Geist","Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  --title-size:96px; --title-weight:600; --title-tracking:-.025em;
+  --title-shadow:drop-shadow(0 10px 40px rgba(var(--bg-rgb),.55));
+  --font-display:"Geist","Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  --mono:"Be Vietnam Pro",Consolas,monospace;
+  --font-app:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;   /* chữ trong khung giao diện mô phỏng = font trang thi thật */
+
+  /* Hình khối & không khí */
+  --round:.7;
+  --grain:.025;
+
+  /* Chuyển động: ngắn, dứt khoát, không nảy */
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-pop:cubic-bezier(.25,1.1,.4,1);
+
+  /* Biến v2 */
+  --font-label:"Geist","Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  --label-tracking:.01em; --label-case:none;
+  --title-case:none; --title-line:1.12;
+  --glass-alpha:.9; --glass-blur:0px;
+  --line-alpha:.22;
+  --glow:.28;
+  --dur-1:.3s; --dur-2:.7s; --dur-3:1.2s; --stagger:.06s;
+  --fx-density:.7; --fx-speed:.8;
+  --margin:128px; --gutter:24px;
+
+  --muted-alpha:.88; --faint-alpha:.6;
+  --accent-text-rgb:140,200,242;     /* #8CC8F2 chữ nhấn */
+  --muted:rgba(var(--muted-rgb),var(--muted-alpha));
+  --faint:rgba(var(--muted-rgb),var(--faint-alpha));
+  --accent-text:rgb(var(--accent-text-rgb));
+  --brand-red:rgb(var(--brand-red-rgb));
+  --x-elev:inset 0 1px 0 rgba(var(--fg-rgb),.08),0 24px 48px -12px rgba(var(--bg-rgb),.75);
+  --x-halo:0 40px 120px -20px rgba(var(--accent-rgb),.42);
+}
+
+/* Biến thể SÁNG "Phòng họp sáng" (phòng không tắt đèn được) */
+:root[data-bien-the="sang"]{
+  color-scheme:light;
+  --bg-rgb:245,246,248; --stage-bg:#EEF0F3; --surface-rgb:255,255,255; --surface-hi-rgb:255,255,255; --fg-rgb:15,18,28;
+  --vignette:transparent; --ink:#0F121C; --ink-strong:#000000; --muted-rgb:48,54,72; --muted-alpha:.86; --faint-alpha:.66;
+  --accent-rgb:47,106,163; --accent-hi-rgb:31,79,134; --accent-text-rgb:31,79,134; --on-accent:#FFFFFF; --accent-2-rgb:15,143,126;
+  --accent-grad:linear-gradient(180deg,#0F121C 0%,#1F3E6E 55%,#2F6AA3 100%);
+  --ok-rgb:5,150,105; --warn-rgb:180,83,9; --danger-rgb:220,38,38; --live-rgb:5,150,105;
+  --title-shadow:none; --grain:.015; --line-alpha:.18; --glow:0; --shadow-rgb:var(--fg-rgb);
+  --x-elev:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(15,18,28,.06),0 20px 44px -16px rgba(15,18,28,.18);
+  --x-halo:0 40px 120px -20px rgba(var(--accent-rgb),.18);
+}
+
+/* ---- Riêng phong cách (chỉ dùng biến; không đổi bố cục khung) ---- */
+.mask{padding:.3em 0 .1em;margin:-.3em 0 -.1em}            /* dấu chồng: Geist nhô ~.16em, Be Vietnam Pro (dự phòng) ~.26em */
+.hl{padding:.3em 0 .12em;margin:-.3em 0 -.12em}           /* chữ gradient chỉ tô trong hộp → nới hộp để dấu không bị xén */
+h1 .line{padding:.3em 0 .12em;margin:-.3em 0 -.12em}      /* design-tokens 3.6: nới hộp dòng, chữ không dời chỗ */
+@keyframes lineUp{from{transform:translateY(140%)}to{transform:none}}
+[data-parallax]{transform:none!important}
+.glass{backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:var(--x-elev)}
+.glass.chinh{box-shadow:var(--x-elev),var(--x-halo)}
+.chips li{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(var(--surface-rgb),.9)}
+.tag{background:linear-gradient(rgba(var(--accent-rgb),.2),rgba(var(--accent-rgb),.2)),rgba(var(--surface-rgb),.9);
+  color:var(--accent-text);border:1px solid rgba(var(--accent-rgb),.6);box-shadow:none;border-radius:999px;
+  font-size:24px;font-weight:600;letter-spacing:.01em;padding:9px 22px 8px}
+.eyebrow>span:last-child{font-size:24px;font-weight:500}
+.stack{font-size:18px;letter-spacing:.02em;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.play *,.play *::before,.play *::after{animation-iteration-count:1!important}}

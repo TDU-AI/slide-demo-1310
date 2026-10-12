@@ -1,0 +1,53 @@
+/* =========================================================
+   Thành phần dùng chung của bộ "Cổng thi trực tuyến TDU — bản v2" (phong cách saas-dark, khóa màu TDU).
+   Chỉ dùng biến phong cách trong theme.css. Nạp sau deck.css + theme.css.
+   Quy ước v2: điểm neo hiện trước, thanh thương hiệu + chân slide ĐỨNG YÊN (không chạy hiệu ứng) để cả bộ liền mạch.
+   ========================================================= */
+
+/* ---------- Thanh thương hiệu: logo · TRƯỜNG ĐẠI HỌC THÀNH ĐÔNG | Cổng thi trực tuyến ---------- */
+.brand{top:56px}
+.brand .org{gap:16px}
+.brand .org img{width:60px;height:60px;box-shadow:0 0 0 3px rgba(var(--fg-rgb),.14),0 10px 26px rgba(var(--bg-rgb),.6)}
+.brand .org-text span{font-size:13px;letter-spacing:.26em}
+.brand .org-text strong{font-size:20px;letter-spacing:.06em}
+.brand .vach{width:1px;height:38px;background:rgba(var(--fg-rgb),.28);margin:0 26px}
+.brand .ten-cong{font-size:20px;font-weight:600;color:var(--accent-text);letter-spacing:.01em}
+
+/* ---------- Chân slide ---------- */
+.foot{bottom:50px}
+.foot .shop{font-size:18px;color:var(--muted)}
+.foot .so-trang{font-size:18px;font-weight:600;letter-spacing:.08em;color:var(--muted);font-variant-numeric:tabular-nums}
+.credit{bottom:20px}
+
+/* ---------- Nhãn chương: viên nhãn viết hoa đầu câu (chữ ký của saas-dark) ---------- */
+.nhan{display:flex;align-items:center;gap:16px}
+
+/* ---------- Tiêu đề: dòng phụ dịu màu ---------- */
+h1 .diu{color:rgba(var(--muted-rgb),.8)}
+.cham-do{display:inline-block;color:var(--brand-red);-webkit-text-fill-color:var(--brand-red)}
+
+/* ---------- Cửa sổ sản phẩm (E3): thanh tiêu đề ghi tên ứng dụng thật, viền tóc, quầng xanh phía sau ---------- */
+.cua-so{font-family:var(--font-app);border-radius:calc(18px * var(--round));overflow:hidden;border:1px solid rgba(var(--fg-rgb),.22);
+  box-shadow:var(--x-elev),var(--x-halo)}
+.cua-so-dau{display:flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(var(--surface-hi-rgb),.97);
+  border-bottom:1px solid var(--glass-line);font-size:18px;font-weight:500;color:var(--muted)}
+.cua-so-dau img{width:24px;height:24px;border-radius:50%;background:var(--ink)}
+.cua-so-dau .dia-chi{margin-left:auto;font-size:17px;color:var(--muted)}
+
+/* ---------- Nhịp nói: hàng ý có số thứ tự (ý đang nói sáng + dòng chi tiết; ý đã qua dịu đi) ---------- */
+.nhip{list-style:none;display:flex;flex-direction:column;gap:26px}
+.nhip li{display:flex;align-items:baseline;gap:20px}
+.nhip .so{flex:none;width:52px;font-size:28px;font-weight:600;color:var(--accent-text);font-variant-numeric:tabular-nums}
+.nhip b{display:block;font-size:42px;font-weight:600;line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+.nhip small{display:none;margin-top:8px;font-size:28px;line-height:1.4;color:var(--muted)}
+.nhip li.dang small{display:block;animation:hienChiTiet var(--dur-2) var(--ease-out) both}
+@keyframes hienChiTiet{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.nhip li.qua b{color:rgba(var(--muted-rgb),.78)}
+.nhip li.qua .so{color:rgba(var(--muted-rgb),.82)}
+.nhip li b,.nhip li .so{transition:color var(--dur-1) var(--ease-out)}
+
+/* ---------- Thẻ đặc (E2) ---------- */
+.the{background:var(--glass);border:1px solid var(--glass-line);border-radius:calc(22px * var(--round));box-shadow:var(--x-elev)}
+
+/* ---------- Ghi chú minh họa / nguồn số liệu ---------- */
+.nguon{font-size:20px;color:var(--muted)}

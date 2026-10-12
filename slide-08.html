@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slide 08 — Kính đề xuất ba việc</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="deck/deck.css" rel="stylesheet">
+<link href="deck/theme.css" rel="stylesheet">
+<link href="deck/tdu-v2.css" rel="stylesheet">
+<style>
+/* =========================================================
+   SLIDE 8 — LỜI ĐỀ NGHỊ · bản đồ S1 "ra mắt căn giữa" (slide kêu gọi được căn giữa để trang nghiêm) · 3 NHỊP · cảm xúc: ĐỈNH NHỎ
+   Ảnh s8: sảnh thư viện kính – thép đối xứng về đêm — trần tối nửa trên (tiêu đề), vũng sáng trên sàn nửa dưới (ba thẻ).
+   Ba việc khớp mục "Trước khi thi thật" của slide 7 và docs/kich_ban_demo_13_10.md.
+   ========================================================= */
+.scrim{background:
+  linear-gradient(180deg,rgba(var(--bg-rgb),.45) 0%,rgba(var(--bg-rgb),.15) 34%,rgba(var(--bg-rgb),.1) 60%,rgba(var(--bg-rgb),.5) 100%),
+  radial-gradient(ellipse 60% 50% at 50% 30%,rgba(var(--bg-rgb),.35),rgba(var(--bg-rgb),0) 100%)}
+.copy{left:0;right:0;width:auto;top:196px;text-align:center}
+.copy .nhan{justify-content:center}
+h1{font-size:104px;margin-top:30px}
+.ba-viec{position:absolute;left:198px;right:198px;top:560px;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+.viec{padding:34px 34px 36px;display:flex;flex-direction:column;min-height:330px}
+.viec .so{font-size:24px;font-weight:600;color:var(--accent-text);font-variant-numeric:tabular-nums}
+.viec .lon{margin-top:18px;font-size:54px;font-weight:600;letter-spacing:-.02em;line-height:1.05;color:var(--accent-text);font-variant-numeric:tabular-nums}
+.viec b{margin-top:10px;text-wrap:balance;font-size:36px;font-weight:600;line-height:1.22;letter-spacing:-.01em;color:var(--ink)}
+.viec p{margin-top:auto;padding-top:18px;font-size:27px;line-height:1.4;color:var(--muted)}
+</style>
+</head>
+<body data-image="assets/s8.webp,assets/s8.png,assets/s7.webp">
+<div class="stage" id="stage">
+  <div class="bg">
+    <div class="bg-move">
+      <div class="bg-kb" style="--kb-origin:50% 60%">
+        <img id="bgImg" alt="">
+        <video id="bgVid" muted loop playsinline autoplay preload="auto"></video>
+      </div>
+    </div>
+  </div>
+  <div class="scrim"></div><div class="vignette"></div><div class="grain"></div>
+
+  <header class="brand">
+    <div class="org"><img src="assets/logo.png" alt="Logo Trường Đại học Thành Đông"><div class="org-text"><span>TRƯỜNG ĐẠI HỌC</span><strong>THÀNH ĐÔNG</strong></div></div>
+    <span class="vach"></span><span class="ten-cong">Cổng thi trực tuyến</span>
+  </header>
+
+  <section class="copy">
+    <div class="nhan anim" style="--d:.9s"><span class="tag">07 · Đề xuất</span></div>
+    <h1><span class="mask"><span class="line" style="--d:.2s">Kính đề xuất ba việc.</span></span></h1>
+  </section>
+
+  <div class="ba-viec">
+    <div class="viec the" data-step="1" data-step-fx="scale">
+      <span class="so">01</span>
+      <span class="lon">30–50</span>
+      <b>bài viết đã chấm điểm</b>
+      <p>Để đo độ lệch, chỉnh AI.</p>
+    </div>
+    <div class="viec the" data-step="2" data-step-fx="scale">
+      <span class="so">02</span>
+      <span class="lon">1</span>
+      <b>thang chấm Viết thống nhất</b>
+      <p>Hiện đang là bản nháp.</p>
+    </div>
+    <div class="viec the" data-step="3" data-step-fx="scale">
+      <span class="so">03</span>
+      <span class="lon">1</span>
+      <b>lớp thi thử thật</b>
+      <p>Một đợt kiểm tra trên lớp.</p>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="shop">Cổng thi trực tuyến · Trường Đại học Thành Đông</div>
+    <div class="so-trang">08 / 09</div>
+  </footer>
+  <div class="ph-badge">Chưa có ảnh nền · thả ảnh vào assets/s8.png</div>
+  <div class="credit">Hình nền tạo bằng AI</div>
+</div>
+<script src="deck/deck.js"></script>
+</body>
+</html>

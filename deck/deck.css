@@ -1,0 +1,190 @@
+/* =========================================================
+   deck.css — KHUNG XƯƠNG dùng chung cho mọi slide (skill slide-making)
+   File này KHÔNG chứa màu/font của riêng bài nào. Màu, font, độ bo góc, hạt phim,
+   nhịp chuyển động… lấy từ deck/theme.css (một "phong cách" trong SKILL/themes/).
+   Thứ tự nạp trong mỗi slide: fonts.css → deck.css → theme.css → (phone.css) → CSS riêng slide.
+   ========================================================= */
+:root{
+  /* Các màu suy ra từ theme.css — theme chỉ cần khai báo bộ ba R,G,B (xem themes/_mau/theme.css) */
+  --bg:rgb(var(--bg-rgb));
+  --accent:rgb(var(--accent-rgb)); --accent-hi:rgb(var(--accent-hi-rgb)); --accent-2:rgb(var(--accent-2-rgb));
+  --ok:rgb(var(--ok-rgb)); --warn:rgb(var(--warn-rgb)); --danger:rgb(var(--danger-rgb)); --live:rgb(var(--live-rgb));
+  --muted:rgba(var(--muted-rgb),.74); --faint:rgba(var(--muted-rgb),.5);
+  --glass:rgba(var(--surface-rgb),var(--glass-alpha)); --glass-line:rgba(var(--fg-rgb),var(--line-alpha));
+  /* Biến v2 — giá trị mặc định; theme.css ghi đè được (giữ nguyên = slide trông như bản cũ) */
+  --font-label:var(--font-body);     /* font nhãn nhỏ (eyebrow) */
+  --label-tracking:.24em;            /* giãn chữ nhãn */
+  --label-case:none;                 /* none | uppercase — kiểu chữ nhãn */
+  --title-case:none;                 /* none | uppercase — kiểu chữ tiêu đề */
+  --title-line:1.08;                 /* khoảng cách dòng tiêu đề */
+  --glass-alpha:.8; --glass-blur:16px;   /* độ đặc / độ mờ của kính .glass */
+  --line-alpha:.16;                  /* độ đậm nét mảnh: viền kính, lưới, dây nối */
+  --glow:.35;                        /* độ phát sáng của quầng, điểm sáng (hiệu ứng FX) */
+  --dur-1:.4s; --dur-2:.8s; --dur-3:1.4s;   /* thời lượng ngắn / vừa / dài */
+  --stagger:.08s;                    /* độ trễ giữa các phần tử nối đuôi */
+  --fx-density:1; --fx-speed:1;      /* hệ số mật độ / tốc độ của hiệu ứng FX */
+  --margin:120px; --gutter:24px;     /* lề trái/phải của sân khấu · khoảng cách giữa các khối */
+  /* Màu thương hiệu của ứng dụng được mô phỏng trong khung UI (không thuộc phong cách) */
+  --zalo:#0068FF;
+  /* Tên cũ (bộ OPC 10/2026) — giữ để chép được thành phần từ các bộ slide cũ; slide mới dùng tên mới */
+  --navy-950:var(--bg); --navy-900:var(--stage-bg); --amber:var(--accent); --amber-hi:var(--accent-hi);
+  --sky:var(--accent-2); --red:var(--danger);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);overflow:hidden}
+body{font-family:var(--font-body);color:var(--ink);-webkit-font-smoothing:antialiased;cursor:default}
+
+/* Sân khấu cố định 1920×1080, tự co giãn theo màn hình/máy chiếu */
+.stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;overflow:hidden;background:var(--stage-bg);transform:translate(-50%,-50%)}
+
+/* ---------- Nền: video → ảnh (deck.js tự nạp theo data-video / data-image) ---------- */
+.bg{position:absolute;inset:0;opacity:0}
+.play .bg{animation:fade 1.4s ease .05s both}
+.bg-move{position:absolute;inset:-1.5%}
+[data-parallax]{transition:transform 1.4s var(--ease-out)}
+.bg-kb{position:absolute;inset:0;transform-origin:var(--kb-origin,66% 72%);animation:kb 28s ease-in-out infinite alternate}
+.bg-kb>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#bgImg,#bgVid{opacity:0;transition:opacity 1.2s ease}
+#bgImg.ready,#bgVid.ready{opacity:1}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.05)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* "Ảnh sống" bằng CSS khi mới có ảnh tĩnh; tự tắt khi có video.
+   Mỗi hiệu ứng PHẢI được đặt left/top/width/height trong CSS riêng của slide (theo vị trí vật thể trong ảnh). */
+.fx{position:absolute;pointer-events:none;opacity:0;transition:opacity 1.5s ease}
+.has-img:not(.has-vid) .fx{opacity:1}
+/* .fx-steam — khói/hơi nóng bốc lên (ly cà phê, nồi, nhang, ống khói) */
+.fx-steam i{position:absolute;bottom:0;left:34%;width:32%;height:46%;border-radius:50%;opacity:0;filter:blur(7px);
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.6),rgba(255,255,255,0) 70%);animation:wisp 5.6s ease-in-out infinite}
+.fx-steam i:nth-child(2){left:18%;animation-delay:-1.9s;animation-duration:6.4s}
+.fx-steam i:nth-child(3){left:50%;animation-delay:-3.7s;animation-duration:5.1s}
+@keyframes wisp{0%{opacity:0;transform:translate(0,10%) scale(.6,.8)}25%{opacity:.55}70%{opacity:.22}100%{opacity:0;transform:translate(22%,-125%) scale(1.35,1.7) skewX(-12deg)}}
+/* .fx-mist — dải sương trôi ngang (thung lũng, mặt hồ, phố sớm) */
+.fx-mist{overflow:hidden;mix-blend-mode:screen}
+.fx-mist i{position:absolute;top:18%;left:0;width:70%;height:62%;border-radius:50%;filter:blur(12px);
+  background:radial-gradient(ellipse,rgba(214,226,244,.42),rgba(214,226,244,0) 70%);animation:mist 32s ease-in-out infinite alternate}
+.fx-mist i:nth-child(2){top:42%;left:30%;width:60%;animation-duration:25s;animation-direction:alternate-reverse}
+@keyframes mist{from{transform:translateX(-28%)}to{transform:translateX(48%)}}
+
+/* Lớp phủ giúp chữ luôn đọc rõ (màu theo --bg-rgb của phong cách; bố cục khác có thể viết lại .scrim trong slide) */
+.scrim{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(var(--bg-rgb),.72) 0%,rgba(var(--bg-rgb),.5) 34%,rgba(var(--bg-rgb),.12) 50%,rgba(var(--bg-rgb),0) 58%),
+    linear-gradient(180deg,rgba(var(--bg-rgb),.55) 0%,rgba(var(--bg-rgb),0) 18%,rgba(var(--bg-rgb),0) 78%,rgba(var(--bg-rgb),.6) 100%)}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 75% at 58% 50%,transparent 55%,var(--vignette) 100%)}
+.grain{position:absolute;inset:-60px;pointer-events:none;opacity:var(--grain);mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-18px,12px)}40%{transform:translate(14px,-20px)}60%{transform:translate(-10px,-8px)}80%{transform:translate(20px,16px)}100%{transform:translate(0,0)}}
+
+/* ---------- Hiệu ứng xuất hiện chung ---------- */
+.anim{opacity:0}
+.play .anim{animation:rise 1s var(--ease-out) var(--d,0s) both}
+@keyframes rise{from{opacity:0;transform:translateY(28px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:none}}
+
+/* ---------- Thanh thương hiệu ---------- */
+.brand{position:absolute;left:var(--margin);top:58px;display:flex;align-items:center;z-index:2}
+.org{display:flex;align-items:center;gap:18px}
+.org img{width:78px;height:78px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(var(--fg-rgb),.16),0 10px 28px rgba(0,0,0,.4)}
+.org-text{display:flex;flex-direction:column;line-height:1.35}
+.org-text span{font-size:13px;font-weight:600;letter-spacing:.28em;color:var(--muted)}
+.org-text strong{font-size:23px;font-weight:800;letter-spacing:.07em}
+.x{font-size:30px;font-weight:300;color:rgba(var(--fg-rgb),.4);margin:0 30px}
+.mark{display:flex;align-items:center;gap:14px}
+.mark-icon{width:52px;height:52px;color:var(--accent-hi);overflow:visible}
+/* .steam — nét khói bốc lên trên biểu tượng (vd tách cà phê); dùng cho path trong .mark-icon */
+.steam{animation:steam 2.8s ease-in-out infinite}
+.steam.s2{animation-delay:.5s}.steam.s3{animation-delay:1s}
+@keyframes steam{0%{opacity:0;transform:translateY(5px)}45%{opacity:1}100%{opacity:0;transform:translateY(-6px)}}
+.mark-text{display:flex;flex-direction:column;line-height:1}
+.mark-text em{font-family:var(--font-display);font-style:italic;font-weight:800;font-size:40px;color:var(--accent-hi);letter-spacing:.01em;margin-bottom:5px}
+.mark-text span{font-size:14px;font-weight:700;letter-spacing:.36em;line-height:1.5}
+
+/* ---------- Khối chữ chính ---------- */
+.copy{position:absolute;left:var(--margin);top:262px;width:1060px;z-index:2}
+.eyebrow{display:flex;align-items:center;gap:20px;margin-bottom:34px}
+.tag{font-size:17px;font-weight:800;letter-spacing:.16em;color:var(--on-accent);background:linear-gradient(92deg,var(--accent-hi),var(--accent));padding:9px 16px 8px;border-radius:calc(9px * var(--round));box-shadow:0 6px 22px rgba(var(--accent-rgb),.35)}
+.eyebrow>span:last-child{font-family:var(--font-label);font-size:18px;font-weight:600;letter-spacing:var(--label-tracking);text-transform:var(--label-case);color:var(--muted)}
+h1{font-family:var(--font-title);font-size:var(--title-size);font-weight:var(--title-weight);line-height:var(--title-line);letter-spacing:var(--title-tracking);text-transform:var(--title-case);filter:var(--title-shadow)}
+.mask{display:block;overflow:hidden;padding:.17em 0 .07em;margin:-.17em 0 -.07em}
+.line{display:block;white-space:nowrap;transform:translateY(118%)}
+.play .line{animation:lineUp 1.15s var(--ease-out) var(--d) both}
+@keyframes lineUp{from{transform:translateY(118%) rotate(2.5deg)}to{transform:none}}
+.hl{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:36px;max-width:900px;font-size:31px;line-height:1.48;font-weight:400;color:var(--muted)}
+.sub b{color:var(--ink-strong);font-weight:700}
+.chips{list-style:none;display:flex;gap:14px;margin-top:44px}
+.chips li{display:flex;align-items:center;gap:11px;padding:14px 24px 14px 18px;border-radius:calc(999px * var(--round));font-size:21px;font-weight:600;
+  background:rgba(var(--fg-rgb),.07);border:1px solid rgba(var(--fg-rgb),.17);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.chips svg{width:24px;height:24px;color:var(--accent-hi);flex:none}
+
+/* ---------- Chân slide ---------- */
+.foot{position:absolute;left:var(--margin);right:var(--margin);bottom:54px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.shop{font-size:20px;color:var(--muted);display:flex;align-items:center}
+.shop b{color:var(--ink-strong);font-weight:700;margin-right:6px}
+.shop i{font-style:normal;opacity:.4;margin:0 14px}
+.live{width:10px;height:10px;border-radius:50%;background:var(--live);margin-right:14px;animation:live 2s ease-out infinite}
+@keyframes live{0%{box-shadow:0 0 0 0 rgba(var(--live-rgb),.55)}100%{box-shadow:0 0 0 14px rgba(var(--live-rgb),0)}}
+.count{display:inline-block;min-width:.7em;text-align:center;color:var(--accent-hi)!important;font-variant-numeric:tabular-nums}
+.stack{font-size:15px;font-weight:600;letter-spacing:.2em;color:var(--faint)}
+
+/* ---------- Thiết bị/khung UI nổi bên phải (điện thoại, bảng báo cáo…) ---------- */
+.device-wrap{position:absolute;z-index:3}
+.device-float{width:100%;height:100%;animation:float 7s ease-in-out infinite alternate}
+@keyframes float{from{transform:translateY(-7px)}to{transform:translateY(9px)}}
+.device{opacity:0}
+.play .device{animation:deviceIn 1.5s var(--ease-out) 1.25s both}
+@keyframes deviceIn{
+  from{opacity:0;transform:perspective(1700px) translate3d(140px,70px,0) rotateY(-24deg) rotateX(8deg) scale(.92)}
+  to{opacity:1;transform:perspective(1700px) rotateY(-7deg) rotateX(2deg)}}
+
+/* Thẻ kính mờ dùng chung (thông báo, lệnh, bảng) */
+.glass{background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));box-shadow:0 26px 56px rgba(0,0,0,.5)}
+.toast{position:absolute;display:flex;gap:14px;align-items:flex-start;padding:16px 20px 16px 16px;border-radius:calc(18px * var(--round));z-index:4;opacity:0}
+@keyframes toastIn{from{opacity:0;transform:translateY(-34px) scale(.95)}to{opacity:1;transform:none}}
+.tick{width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--ok);box-shadow:0 0 22px rgba(var(--ok-rgb),.55)}
+.tick svg{width:18px;height:18px;color:#fff}
+.toast small{display:block;font-size:12px;font-weight:600;letter-spacing:.16em;color:rgba(var(--muted-rgb),.55);margin-bottom:3px}
+.toast b{display:block;font-size:17.5px;font-weight:700;margin-bottom:3px}
+.toast p{font-size:14px;color:var(--muted);white-space:nowrap}
+
+/* Ô lệnh được "gõ" (vd /tong-ket-thang): vị trí + thời điểm đặt riêng trong slide */
+.cmd{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 14px 12px 18px;border-radius:calc(14px * var(--round));z-index:4;opacity:0;font-family:var(--mono);font-size:19px}
+.cmd .pr{color:var(--accent-hi);font-weight:700}
+.cmd code{font-family:inherit;color:var(--ink-strong)}
+.caret{width:9px;height:21px;margin-left:-6px;background:var(--accent-hi);animation:caret 1s steps(2) infinite}
+@keyframes caret{50%{opacity:0}}
+.cmd kbd{font-family:var(--font-body);font-size:12.5px;font-weight:700;padding:4px 9px;border-radius:calc(7px * var(--round));border:1px solid rgba(var(--fg-rgb),.25);color:var(--faint);transition:all .15s ease}
+.cmd kbd.hit{background:var(--accent);border-color:var(--accent);color:var(--on-accent);transform:scale(.9)}
+
+/* Nhãn nền tạm & ghi nguồn hình AI */
+.ph-badge{position:absolute;right:22px;bottom:18px;z-index:5;font-size:13px;color:rgba(255,255,255,.55);background:rgba(0,0,0,.35);padding:6px 12px;border-radius:999px}
+.has-bg .ph-badge{display:none}
+.credit{position:absolute;right:var(--margin);bottom:24px;z-index:2;font-size:12.5px;letter-spacing:.04em;color:rgba(var(--muted-rgb),.36);display:none}
+.has-vid .credit,.has-img .credit{display:block}
+
+/* ---------- Nhịp bấm ("nhịp nói"): data-step="k" hiện ở lần bấm thứ k (deck.js thêm lớp .step-on) ----------
+   Kiểu hiện: data-step-fx="rise" (mặc định) | fade | scale | blur | wipe | none (deck.css không đụng — slide tự lo bằng .step-on).
+   Nối đuôi trong cùng một nhịp: style="--step-delay:.12s". Hướng dẫn: references/motion/steps.md */
+[data-step]{opacity:0;
+  transition:opacity var(--dur-2) var(--ease-out),transform var(--dur-2) var(--ease-out),filter var(--dur-2) var(--ease-out),clip-path var(--dur-2) var(--ease-out);
+  transition-delay:var(--step-delay,0s)}
+[data-step].step-on{opacity:1}
+[data-step]:not(.step-on){transition-delay:0s}          /* lùi nhịp: ẩn ngay, không chờ */
+[data-step]:not(.step-on):not([data-step-fx=none]){pointer-events:none}   /* đang ẩn → không bắt chuột (link/nút ẩn không chặn "bấm để chuyển") */
+/* Chỉ rise (mặc định) và scale đụng tới transform → fade/blur/wipe/none giữ nguyên transform riêng của phần tử (căn giữa, xoay…) */
+[data-step]:where(:not([data-step-fx])),[data-step-fx=rise]{transform:translateY(18px)}
+[data-step-fx=scale]{transform:scale(.94)}
+[data-step]:where(:not([data-step-fx]),[data-step-fx=rise],[data-step-fx=scale]).step-on{transform:none}
+[data-step-fx=blur]{filter:blur(12px)}
+[data-step-fx=blur].step-on{filter:blur(0)}
+[data-step-fx=wipe]{opacity:1;clip-path:inset(-25% 100% -25% 0)}   /* chừa trên/dưới để không cắt dấu tiếng Việt */
+[data-step-fx=wipe].step-on{clip-path:inset(-25% -6% -25% -6%)}
+[data-step-fx=none]{opacity:1;transition:none}
+.step-instant [data-step]{transition:none!important}     /* deck.js dùng khi chạy lại: về nhịp 0 tức thì */
+
+@media (prefers-reduced-motion:reduce){
+  .play *,.play *::before{animation-duration:.01s!important;animation-delay:0s!important}
+  [data-step]{transition:none!important}
+}

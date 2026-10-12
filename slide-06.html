@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slide 06 — An toàn được cài sẵn</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="deck/deck.css" rel="stylesheet">
+<link href="deck/theme.css" rel="stylesheet">
+<link href="deck/tdu-v2.css" rel="stylesheet">
+<link href="deck/giao-dien-tdu.css" rel="stylesheet">
+<style>
+/* =========================================================
+   SLIDE 6 — AN TOÀN, MINH BẠCH · bản đồ S3 "bento" · 3 NHỊP · cảm xúc: LẮNG
+   1 ô lớn (hàng đợi gửi email thật: chỉ bài "Đã duyệt" mới được gửi — email_flow.queue_ket_qua_emails lấy bài reviewed)
+   + 2 ô nhỏ: thí sinh từ chối AI → giáo viên chấm tay (nhánh no_ai_consent) · công cụ xóa/ẩn danh dữ liệu (scripts/xoa_du_lieu_hs.py, NĐ 13/2023).
+   Ảnh s6: tường tiêu âm nỉ xanh than, tối và đều — nền yên cho lưới bento.
+   ========================================================= */
+.scrim{background:linear-gradient(180deg,rgba(var(--bg-rgb),.4) 0%,rgba(var(--bg-rgb),.1) 30%,rgba(var(--bg-rgb),.15) 70%,rgba(var(--bg-rgb),.5) 100%)}
+.copy{top:180px;width:1500px}
+h1{font-size:84px;margin-top:28px}
+.bento{position:absolute;left:var(--margin);right:var(--margin);top:476px;height:500px;z-index:2;
+  display:grid;grid-template-columns:7fr 5fr;grid-template-rows:1fr 1fr;gap:24px}
+.o{padding:30px 34px;display:flex;flex-direction:column}
+.o-lon{grid-row:1 / span 2}
+.o h3{font-size:40px;font-weight:600;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.o p{margin-top:10px;font-size:28px;line-height:1.4;color:var(--muted)}
+.o .so{font-size:24px;font-weight:600;color:var(--accent-text);margin-bottom:12px;font-variant-numeric:tabular-nums}
+.o-lon .hd{margin-top:22px}
+.o-nho{flex-direction:row;gap:26px;align-items:flex-start}
+.o-nho .bieu{flex:none;width:64px;height:64px;border-radius:calc(18px * var(--round));display:grid;place-items:center;background:rgba(var(--accent-rgb),.22);color:var(--accent-hi)}
+.o-nho .bieu svg{width:34px;height:34px}
+</style>
+</head>
+<body data-image="assets/s6.webp,assets/s6.png,assets/s5.webp">
+<div class="stage" id="stage">
+  <div class="bg">
+    <div class="bg-move">
+      <div class="bg-kb" style="--kb-origin:40% 60%">
+        <img id="bgImg" alt="">
+        <video id="bgVid" muted loop playsinline autoplay preload="auto"></video>
+      </div>
+    </div>
+  </div>
+  <div class="scrim"></div><div class="vignette"></div><div class="grain"></div>
+
+  <header class="brand">
+    <div class="org"><img src="assets/logo.png" alt="Logo Trường Đại học Thành Đông"><div class="org-text"><span>TRƯỜNG ĐẠI HỌC</span><strong>THÀNH ĐÔNG</strong></div></div>
+    <span class="vach"></span><span class="ten-cong">Cổng thi trực tuyến</span>
+  </header>
+
+  <section class="copy">
+    <div class="nhan anim" style="--d:.9s"><span class="tag">05 · An toàn</span></div>
+    <h1>
+      <span class="mask"><span class="line" style="--d:.2s">An toàn được cài sẵn trong hệ thống.</span></span>
+    </h1>
+  </section>
+
+  <div class="bento">
+    <!-- Ô LỚN · nhịp 1: hàng đợi gửi email — chỉ bài đã duyệt mới được gửi -->
+    <div class="o o-lon the" data-step="1" data-step-fx="scale">
+      <div class="so">01</div>
+      <h3>Chưa duyệt, chưa gửi điểm</h3>
+      <div class="hd" data-qa-ui data-qa-allow-color>
+        <div class="hd-dau"><span>Gửi kết quả qua email · Ca thi thử</span><span>3 bài</span></div>
+        <div class="hd-dong"><div class="ten">Thí sinh 01<small>Tiếng Anh cơ bản 1</small></div><span class="hd-tt duyet">✓ Đã duyệt</span><span class="hd-thu gui">Đã gửi email</span></div>
+        <div class="hd-dong"><div class="ten">Thí sinh 02<small>Tiếng Anh cơ bản 1</small></div><span class="hd-tt cho">Chờ duyệt</span><span class="hd-thu giu">Giữ lại</span></div>
+        <div class="hd-dong"><div class="ten">Thí sinh 03<small>Tiếng Anh cơ bản 1</small></div><span class="hd-tt co">⚠ AI chấm lệch</span><span class="hd-thu giu">Giữ lại</span></div>
+      </div>
+    </div>
+    <!-- Ô NHỎ · nhịp 2 -->
+    <div class="o o-nho the" data-step="2" data-step-fx="scale">
+      <span class="bieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>
+      <div><div class="so">02</div><h3>Không đồng ý dùng AI?</h3><p>Giáo viên chấm tay bài viết.</p></div>
+    </div>
+    <!-- Ô NHỎ · nhịp 3 -->
+    <div class="o o-nho the" data-step="3" data-step-fx="scale">
+      <span class="bieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.1-8 9-4.6-.9-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <div><div class="so">03</div><h3>Bảo vệ dữ liệu thí sinh</h3><p>Xóa, ẩn danh theo Nghị định 13/2023.</p></div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="shop">Cổng thi trực tuyến · Trường Đại học Thành Đông</div>
+    <div class="so-trang">06 / 09</div>
+  </footer>
+  <div class="ph-badge">Chưa có ảnh nền · thả ảnh vào assets/s6.png</div>
+  <div class="credit">Hình nền tạo bằng AI</div>
+</div>
+<script src="deck/deck.js"></script>
+</body>
+</html>

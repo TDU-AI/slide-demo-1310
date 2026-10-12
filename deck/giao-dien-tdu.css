@@ -1,0 +1,147 @@
+/* =========================================================
+   GIAO DIỆN MÔ PHỎNG CỔNG THI TDU (màn hình thật dựng lại bằng code) — bộ v2.
+   Màu trong file này là MÀU THẬT của giao diện hệ thống (backend/static/tacb_exam.html, gv.html, email kết quả):
+   ngoại lệ được phép "app được mô phỏng" — không đổi theo phong cách slide.
+   Chữ thật lấy từ trang thật ("Mã dự thi", "6 ký tự in trên phiếu dự thi", "Đã nộp bài thành công"…).
+   ========================================================= */
+
+/* ---------- Các màn hình trong điện thoại (slide 3) ---------- */
+.mh-khung{position:relative;flex:1 1 auto;min-height:0}
+.mh{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:translateX(26px);
+  transition:opacity .45s ease,transform .6s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.mh.hien{opacity:1;transform:none}
+
+/* màn 1: vào thi */
+.v-dau{background:#1F2A5E;color:#fff;text-align:center;padding:22px 20px 62px;display:flex;flex-direction:column;align-items:center}
+.v-logo{width:66px;height:66px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 5px rgba(255,255,255,.14)}
+.v-logo img{width:58px;height:58px}
+.v-truong{margin-top:12px;font-size:11px;font-weight:600;letter-spacing:.16em;color:#C9D6F0}
+.v-ten{margin-top:4px;font-size:23px;font-weight:700}
+.v-phu{font-size:13px;color:#C9D6F0}
+.v-the{margin:-42px 14px 0;background:#fff;border-radius:18px;padding:18px;box-shadow:0 10px 28px rgba(20,26,51,.12);display:flex;flex-direction:column}
+.v-the label{font-size:14px;font-weight:600;color:#141A33;margin-bottom:6px}
+.v-o{height:46px;border:1.5px solid #CFD6E4;border-radius:12px;padding:0 14px;display:flex;align-items:center;font-size:16px;color:#141A33;white-space:nowrap;overflow:hidden}
+.v-ma{font-size:21px;font-weight:700;letter-spacing:.22em;border-color:#4683BB;background:#EEF4FB}
+.v-gy{font-size:12px;color:#5B647F;margin:6px 0 14px;line-height:1.45}
+.v-nhay{display:inline-block;width:2px;height:20px;background:#4683BB;margin-left:1px;animation:caret 1s steps(2) infinite}
+.v-nut{position:relative;height:52px;border-radius:14px;background:#1F2A5E;color:#fff;font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;overflow:hidden}
+.v-luu-y{list-style:none;margin:16px 18px 0;font-size:12.5px;color:#3D4561;display:flex;gap:8px;line-height:1.45}
+.v-luu-y svg{flex:none;color:#2F6AA3;margin-top:1px}
+.cham-nhan{position:absolute;inset:0;border-radius:inherit;background:rgba(169,205,242,.45);opacity:0}
+.cham-nhan.go{animation:chamNhan .8s ease-out both}
+@keyframes chamNhan{0%{opacity:.9;transform:scale(.6)}100%{opacity:0;transform:scale(1.15)}}
+
+/* màn 3: đã nộp bài */
+.k-dau{text-align:center;padding:24px 18px 0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.k-vong{width:62px;height:62px;border-radius:50%;background:#E7F6EE;color:#11683F;display:grid;place-items:center}
+.k-tieu{font-size:21px;font-weight:700;margin-top:6px}
+.k-phu{font-size:13.5px;color:#5B647F}
+.k-the{margin:14px 14px 0;background:#fff;border:1px solid #E3E8F2;border-radius:16px;padding:14px}
+.k-tong{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.k-tong b{display:block;font-size:15px}
+.k-tong small{display:block;font-size:12.5px;color:#5B647F}
+.k-so{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.k-so small{display:inline;font-size:17px;color:#5B647F;font-weight:600}
+.k-luoi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.k-o{background:#F7F9FC;border:1px solid #E3E8F2;border-radius:12px;padding:8px 11px}
+.k-o span{display:block;font-size:12px;color:#5B647F}
+.k-o b{font-size:17px;font-variant-numeric:tabular-nums}
+.k-o b small{font-size:12.5px;color:#5B647F;font-weight:500}
+.k-o.cho b{color:#8A4B00;font-size:15px}
+.k-email{display:flex;gap:10px;font-size:13.5px;line-height:1.5;color:#3D4561}
+.k-email svg{flex:none;color:#2F6AA3;margin-top:2px}
+.k-email b{color:#141A33}
+.k-sua{display:block;margin-top:4px;color:#2F6AA3;font-weight:600}
+.k-ve{margin:14px 14px 0;height:46px;border-radius:12px;border:1px solid #CFD6E4;display:grid;place-items:center;font-weight:600;color:#1F2A5E;font-size:15px;background:#fff}
+
+/* màn 4: thư kết quả */
+.m-thanh{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 4px;color:#2F6AA3;font-size:15px;font-weight:600;background:#fff}
+.m-tieu{background:#fff;padding:6px 16px 10px;font-size:16px;font-weight:700;line-height:1.35}
+.m-gui{background:#fff;display:flex;align-items:center;gap:10px;padding:0 16px 12px;border-bottom:1px solid #E3E8F2}
+.m-gui img{width:32px;height:32px}
+.m-gui b{display:block;font-size:14px}
+.m-gui span{display:block;font-size:12px;color:#5B647F}
+.m-than{margin:12px 12px 0;background:#fff;border:1px solid #E3E8F2;border-radius:14px;overflow:hidden}
+.m-band{background:#1F2A5E;color:#fff;display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:11px;font-weight:700;letter-spacing:.14em}
+.m-band img{width:24px;height:24px;background:#fff;border-radius:50%}
+.m-noi{padding:10px 12px 12px;font-size:12.5px;line-height:1.5;color:#3D4561}
+.m-noi p{margin-bottom:6px}
+.m-noi b{color:#141A33}
+.m-bang,.m-loi{width:100%;border-collapse:collapse;margin:4px 0 8px;font-size:12.5px}
+.m-bang td{padding:5px 8px;border-bottom:1px solid #E3E8F2}
+.m-bang td:last-child{text-align:right;font-weight:700;color:#141A33;font-variant-numeric:tabular-nums}
+.m-bang tr.tong td{background:#1F2A5E;color:#fff;border:0;font-weight:700}
+.m-loi th{text-align:left;font-size:11px;color:#5B647F;font-weight:600;padding:4px 8px;background:#F4F6FB}
+.m-loi td{padding:4px 8px;border-bottom:1px solid #E3E8F2}
+.m-loi td:first-child{color:#A61B14;text-decoration:line-through;text-decoration-color:rgba(166,27,20,.5)}
+.m-loi td:last-child{color:#11683F;font-weight:600}
+.m-ok{color:#11683F;font-weight:600;margin:2px 0 8px}
+.mh.thu{background:#F4F6FB}
+.m-pk{height:40px;border-radius:10px;background:#1F2A5E;color:#fff;display:grid;place-items:center;font-weight:600;font-size:13.5px}
+
+/* ---------- Màn "Duyệt bài" của trang giáo viên (slide 4) ---------- */
+.md{width:100%;height:100%;background:#fff;color:#141A33;display:flex;flex-direction:column}
+.md-dau{display:flex;align-items:flex-start;justify-content:space-between;padding:22px 28px 16px;border-bottom:1px solid #E3E8F2}
+.md-tieu{display:flex;align-items:center;gap:14px;font-size:28px;font-weight:700}
+.md-phu{font-size:17px;color:#5B647F;margin-top:4px}
+.md-x{font-size:22px;color:#8A92AB}
+.tt{font-size:16px;font-weight:600;border-radius:999px;padding:5px 14px;background:#E8F0FA;color:#1F4F86;transition:background-color .35s ease,color .35s ease}
+.tt.xong{background:#E7F6EE;color:#11683F}
+.md-than{flex:1 1 auto;min-height:0;padding:18px 28px 0;display:flex;flex-direction:column;gap:15px;overflow:hidden}
+.md-diem{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.md-diem div{background:#F7F9FC;border:1px solid #E3E8F2;border-radius:14px;padding:11px 16px}
+.md-diem span{display:block;font-size:15.5px;color:#5B647F}
+.md-diem b{font-size:28px;font-variant-numeric:tabular-nums}
+.md-diem b small{font-size:17px;color:#5B647F;font-weight:500}
+.co-cam{display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:600;border-radius:999px;padding:6px 14px;background:#FFF3E0;color:#8A4B00;
+  transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+.co-cam.nho{font-size:15px;padding:3px 11px;margin-left:10px;vertical-align:2px}
+.co-cam.an{opacity:0;transform:translateY(8px)}
+.co-cam.nhay{animation:nhay 1.1s ease-out 2}
+@keyframes nhay{0%{box-shadow:0 0 0 0 rgba(232,167,106,.9)}100%{box-shadow:0 0 0 18px rgba(232,167,106,0)}}
+.md-muc h4{font-size:19px;font-weight:700;margin-bottom:8px;display:flex;align-items:center}
+.md-muc h4 span.mo{font-weight:400;color:#5B647F;font-size:16px;margin-left:6px}
+.bai-lam{background:#F7F9FC;border:1px solid #E3E8F2;border-radius:12px;padding:12px 16px;font-size:17.5px;line-height:1.55;color:#3D4561}
+.bai-lam u{text-decoration:none;background:linear-gradient(transparent 62%,rgba(226,38,31,.18) 62%)}
+.hai-luot{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.luot{border:1.5px solid #E3E8F2;border-radius:14px;padding:12px 16px;transition:border-color .4s ease,box-shadow .4s ease,opacity .4s ease}
+.luot b{display:block;font-size:20px}
+.luot p{font-size:16px;line-height:1.5;color:#3D4561;margin-top:4px}
+.luot.cho{opacity:.45}
+.luot.sang{border-color:#4683BB;box-shadow:0 0 0 4px rgba(70,131,187,.16)}
+.luot.lech{border-color:#E8A76A;box-shadow:0 0 0 4px rgba(232,167,106,.2)}
+.bang-loi{width:100%;border-collapse:collapse;font-size:16px}
+.bang-loi th{text-align:left;font-size:14.5px;font-weight:600;color:#5B647F;background:#F4F6FB;padding:7px 12px}
+.bang-loi td{padding:7px 12px;border-bottom:1px solid #E3E8F2;color:#3D4561}
+.bang-loi td:first-child{color:#A61B14;font-weight:600}
+.bang-loi td:nth-child(2){color:#11683F;font-weight:600}
+.md-chan{display:flex;align-items:flex-end;gap:16px;padding:16px 28px 22px;border-top:1px solid #E3E8F2;margin-top:14px}
+.md-chan label{display:block;font-size:15px;font-weight:600;margin-bottom:6px}
+.md-chan .o{height:50px;border:1.5px solid #CFD6E4;border-radius:12px;padding:0 14px;display:flex;align-items:center;font-size:19px;font-variant-numeric:tabular-nums;transition:border-color .3s ease}
+.md-chan .o.mo{color:#5B647F;font-size:17px}
+.md-chan .o.dang{border-color:#4683BB}
+.o-diem{flex:0 0 190px}.o-ghi{flex:1 1 auto}
+.nut-duyet{position:relative;flex:none;height:50px;padding:0 30px;border-radius:12px;background:#1F2A5E;color:#fff;font-size:19px;font-weight:600;
+  display:flex;align-items:center;gap:8px;overflow:hidden;transition:background-color .35s ease}
+.nut-duyet svg{display:none}
+.nut-duyet.xong{background:#11683F}
+.nut-duyet.xong svg{display:block}
+.nut-duyet .gon{position:absolute;inset:0;background:rgba(255,255,255,.4);opacity:0}
+.nut-duyet .gon.go{animation:gon .7s ease-out both}
+@keyframes gon{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(1.4)}}
+.con-tro{position:absolute;left:0;top:0;width:34px;height:34px;z-index:6;opacity:0;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45))}
+
+/* ---------- Hàng đợi gửi email (slide 6) ---------- */
+.hd{font-family:var(--font-app);width:100%;background:#fff;color:#141A33;border-radius:14px;overflow:hidden}
+.hd-dau{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;background:#F4F6FB;border-bottom:1px solid #E3E8F2;font-size:18px;font-weight:600;color:#3D4561}
+.hd-dong{display:flex;align-items:center;gap:16px;padding:18px 22px;border-bottom:1px solid #E3E8F2;font-size:23px;font-weight:600}
+.hd-dong:last-child{border-bottom:0}
+.hd-dong .ten{flex:1 1 auto;min-width:0}
+.hd-dong .ten small{display:block;font-size:16px;font-weight:400;color:#5B647F}
+.hd-tt{flex:none;font-size:18px;font-weight:600;border-radius:999px;padding:6px 14px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.hd-tt.duyet{background:#E7F6EE;color:#11683F}
+.hd-tt.cho{background:#EEF1F6;color:#3D4561}
+.hd-tt.co{background:#FFF3E0;color:#8A4B00}
+.hd-thu{flex:none;width:170px;text-align:right;font-size:18px;font-weight:600}
+.hd-thu.gui{color:#11683F}
+.hd-thu.giu{color:#5B647F}

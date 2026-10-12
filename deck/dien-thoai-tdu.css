@@ -1,0 +1,63 @@
+/* =========================================================
+   Điện thoại mô phỏng TRANG THI THẬT của Cổng thi TDU (backend/static/tacb_exam.html)
+   — chữ trên màn hình khớp trang thật ("Đã nghe 1/2 lần", "Bài làm tự lưu 30 giây một lần"…).
+   Màu bên trong màn hình là màu thật của giao diện hệ thống (ngoại lệ được phép: "app được mô phỏng").
+   Khung máy: .dt (418×872) > .dt-man (390×844). Dùng chung cho slide 1 và slide 3 của bộ v2 (chép từ bộ cũ docs/slide_demo, bóng/quầng đổi sang biến phong cách).
+   ========================================================= */
+.dt{font-family:var(--font-app);position:relative;width:418px;height:872px;padding:14px;border-radius:64px;background:#04060F;
+  box-shadow:0 0 0 1.5px rgba(var(--fg-rgb),.2),0 0 0 9px rgba(var(--fg-rgb),.04),0 70px 140px rgba(var(--bg-rgb),.8),0 0 190px rgba(var(--accent-rgb),.5)}
+.dt-man{position:relative;width:390px;height:844px;border-radius:50px;overflow:hidden;background:#F4F6FB;
+  display:flex;flex-direction:column;color:#141A33;font-size:15px;line-height:1.5}
+.dt-tt{flex:none;height:46px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:4px 26px 0 36px;font-size:15px;font-weight:600}
+.dt-dao{position:absolute;left:50%;top:11px;width:112px;height:32px;margin-left:-56px;border-radius:20px;background:#04060F;z-index:2}
+.dt-pin{display:flex;gap:6px;align-items:center}
+.dt-dau{flex:none;background:#fff;border-bottom:1px solid #E3E8F2;padding:8px 16px 12px;display:flex;flex-direction:column;gap:12px}
+.dt-hang{display:flex;align-items:center;gap:10px}
+.dt-hang img{width:36px;height:36px;flex:none;display:block}
+.dt-ten{flex:1 1 auto;min-width:0}
+.dt-ten b{display:block;font-size:15px;line-height:1.3}
+.dt-ten span{display:block;font-size:12.5px;color:#5B647F}
+.dt-gio{flex:none;display:flex;align-items:center;gap:6px;background:#1F2A5E;color:#fff;border-radius:999px;padding:8px 12px 8px 10px;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+.dt-tien{display:flex;justify-content:space-between;font-size:12.5px;color:#3D4561;margin-bottom:6px}
+.dt-tien b{color:#141A33;font-variant-numeric:tabular-nums}
+.dt-luu{display:flex;align-items:center;gap:5px;color:#5B647F;font-weight:600;transition:color .3s ease}
+.dt-luu svg{display:none}
+.dt-luu.tot{color:#11683F}
+.dt-luu.tot svg{display:block}
+.dt-thanh{height:6px;border-radius:999px;background:#E3E8F2;overflow:hidden}
+.dt-thanh i{display:block;height:6px;width:30%;border-radius:999px;background:#4683BB;transition:width .8s cubic-bezier(.16,1,.3,1)}
+.dt-tab{display:flex;gap:8px}
+.dt-tab span{flex:1 1 0;display:flex;flex-direction:column;align-items:center;padding:7px 4px;border-radius:10px;background:#EEF2F8;color:#1F2A5E;font-size:13px;font-weight:600;line-height:1.35}
+.dt-tab small{font-size:11.5px;font-weight:400;color:#3D4561;font-variant-numeric:tabular-nums}
+.dt-tab .dang{background:#1F2A5E;color:#fff}
+.dt-tab .dang small{color:#C9D6F0}
+.dt-than{flex:1 1 auto;min-height:0;overflow:hidden;padding:16px 16px 0;display:flex;flex-direction:column;gap:14px}
+.dt-than h3{margin:0;font-size:17px;font-weight:700}
+.dt-the{flex:none;background:#fff;border:1px solid #E3E8F2;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:12px}
+.dt-nghe{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600}
+.dt-chip{font-size:12px;font-weight:600;color:#1F4F86;background:#E8F0FA;border-radius:999px;padding:4px 10px}
+.dt-play{display:flex;align-items:center;gap:12px}
+.dt-nut{flex:none;width:48px;height:48px;border-radius:50%;background:#1F2A5E;color:#fff;display:flex;align-items:center;justify-content:center}
+.dt-chay{flex:1 1 auto}
+.dt-chay i{display:block;height:6px;border-radius:999px;background:#E3E8F2;overflow:hidden}
+.dt-chay i b{display:block;height:6px;width:31%;border-radius:999px;background:#4683BB}
+.dt-chay span{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:#5B647F;font-variant-numeric:tabular-nums}
+.dt-huong{font-size:14px;color:#3D4561}
+.dt-huong b{color:#141A33}
+.dt-cau{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:500;line-height:1.45}
+.dt-so{flex:none;font-size:12px;font-weight:700;color:#fff;background:#2F6AA3;border-radius:8px;padding:3px 8px;line-height:1.4}
+.dt-chon{display:flex;gap:8px}
+.dt-chon>span{position:relative;flex:1 1 0;min-height:112px;border-radius:14px;border:2px solid #D9DFEB;background:#fff;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;color:#1F2A5E;font-size:15px;font-weight:700;transition:border-color .25s ease,background-color .25s ease}
+.dt-chon>span.chon{border-color:#1F2A5E;background:#EEF4FB}
+.dt-tich{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:#1F2A5E;color:#fff;display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.4);transition:opacity .25s ease,transform .35s cubic-bezier(.34,1.56,.64,1)}
+.chon>.dt-tich{opacity:1;transform:none}
+.dt-cham-tay{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(70,131,187,.35);opacity:0;pointer-events:none}
+.dt-cham-tay.go{animation:chamTay .7s ease-out both}
+@keyframes chamTay{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
+.dt-day{flex:none;background:#fff;border-top:1px solid #E3E8F2;padding:12px 16px 24px;display:flex;align-items:center;gap:12px}
+.dt-day div{flex:1 1 auto;display:flex;flex-direction:column;gap:2px}
+.dt-day b{font-size:13px}
+.dt-day small{font-size:12px;color:#5B647F}
+.dt-nop{flex:none;height:50px;padding:0 26px;border-radius:14px;background:#1F2A5E;color:#fff;font-size:16px;font-weight:600;display:flex;align-items:center}

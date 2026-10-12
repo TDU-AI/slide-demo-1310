@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slide 04 — AI đề xuất, giáo viên quyết định</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="deck/deck.css" rel="stylesheet">
+<link href="deck/theme.css" rel="stylesheet">
+<link href="deck/tdu-v2.css" rel="stylesheet">
+<link href="deck/giao-dien-tdu.css" rel="stylesheet">
+<style>
+/* =========================================================
+   SLIDE 4 — AI ĐỀ XUẤT, GIÁO VIÊN QUYẾT ĐỊNH · bản đồ S2 (chữ trái · cửa sổ sản phẩm phải) · 3 NHỊP · WOW 2 · cảm xúc: ĐỈNH
+   Nhịp 1: hai lượt AI chấm sáng lên · nhịp 2: lệch 0,6 > ngưỡng 0,5 → cờ "2 lần AI chấm lệch nhau" · nhịp 3: giáo viên bấm Duyệt.
+   Ngưỡng lệch của đề TACB = 0,5 (thi_online_service: divergence_threshold=0.5). Điểm bài viết = trung bình 2 lượt
+   (double_grading._combine): (1,5 + 0,9) / 2 = 1,2. Dữ liệu minh họa — ghi rõ dưới cửa sổ.
+   Ảnh s4: tầng văn phòng khoa về đêm — tường tối trái (chữ), phòng họp kính bên phải (nằm sau cửa sổ sản phẩm).
+   ========================================================= */
+.scrim{background:linear-gradient(90deg,rgba(var(--bg-rgb),.62) 0%,rgba(var(--bg-rgb),.38) 36%,rgba(var(--bg-rgb),0) 48%),
+  linear-gradient(180deg,rgba(var(--bg-rgb),.3) 0%,rgba(var(--bg-rgb),0) 20%,rgba(var(--bg-rgb),0) 80%,rgba(var(--bg-rgb),.5) 100%)}
+.copy{top:196px;width:680px}
+h1{font-size:88px;margin-top:30px}
+.nhip{position:absolute;left:var(--margin);top:640px;width:660px;z-index:2;gap:22px}
+.nhip b{font-size:40px}
+.nhip small{font-size:26px}
+
+.cs-wrap{left:836px;top:136px;width:968px;height:834px}
+.cs-wrap .device-float{animation:none}
+.play .cs-wrap .device{animation:traiLen 1.2s var(--ease-out) .8s both}
+@keyframes traiLen{from{opacity:0;transform:perspective(1800px) translateY(70px) rotateX(8deg)}to{opacity:1;transform:none}}
+.cs-wrap .cua-so{width:100%;height:100%;display:flex;flex-direction:column}
+.cs-wrap .md{flex:1 1 auto;min-height:0}
+.minh-hoa{position:absolute;left:836px;top:984px;z-index:3}
+</style>
+</head>
+<body data-image="assets/s4.webp,assets/s4.png,assets/s3.webp">
+<div class="stage" id="stage">
+  <div class="bg">
+    <div class="bg-move">
+      <div class="bg-kb" style="--kb-origin:72% 52%">
+        <img id="bgImg" alt="">
+        <video id="bgVid" muted loop playsinline autoplay preload="auto"></video>
+      </div>
+    </div>
+  </div>
+  <div class="scrim"></div><div class="vignette"></div><div class="grain"></div>
+
+  <header class="brand">
+    <div class="org"><img src="assets/logo.png" alt="Logo Trường Đại học Thành Đông"><div class="org-text"><span>TRƯỜNG ĐẠI HỌC</span><strong>THÀNH ĐÔNG</strong></div></div>
+    <span class="vach"></span><span class="ten-cong">Cổng thi trực tuyến</span>
+  </header>
+
+  <section class="copy">
+    <div class="nhan anim" style="--d:.9s"><span class="tag">03 · Giáo viên quyết định</span></div>
+    <h1>
+      <span class="mask"><span class="line diu" style="--d:.2s">AI đề xuất.</span></span>
+      <span class="mask"><span class="line hl" style="--d:.34s">Giáo viên</span></span>
+      <span class="mask"><span class="line hl" style="--d:.48s">quyết định.</span></span>
+    </h1>
+  </section>
+
+  <ol class="nhip">
+    <li data-step="1"><span class="so">01</span><div><b>AI chấm hai lần, độc lập</b><small>Mỗi lần một điểm và nhận xét riêng.</small></div></li>
+    <li data-step="2"><span class="so">02</span><div><b>Lệch quá 0,5 điểm: gắn cờ</b><small>1,5 và 0,9 — lệch 0,6, phải xem bài.</small></div></li>
+    <li data-step="3"><span class="so">03</span><div><b>Giáo viên chốt và bấm Duyệt</b><small>Chưa duyệt thì chưa gửi điểm.</small></div></li>
+  </ol>
+
+  <!-- CỬA SỔ SẢN PHẨM: màn "Duyệt bài" của trang giáo viên (gv.html) — màu thật của hệ thống -->
+  <div class="device-wrap cs-wrap">
+    <div class="device-float">
+      <div class="device cua-so" data-qa-ui data-qa-allow-color>
+        <div class="cua-so-dau"><img src="assets/logo.png" alt="">Cổng thi TDU · Trang giáo viên<span class="dia-chi">Chấm bài · Tiếng Anh cơ bản 1</span></div>
+        <div class="md">
+          <div class="md-dau">
+            <div>
+              <div class="md-tieu">Duyệt bài <span class="tt" id="ttBai">Đã chấm</span></div>
+              <div class="md-phu">Nguyễn Văn A · SBD 0123 · Đề TACB1.1210</div>
+            </div>
+            <span class="md-x">✕</span>
+          </div>
+          <div class="md-than">
+            <div class="md-diem">
+              <div><span>Trắc nghiệm (máy chấm)</span><b>6,5 <small>/ 8</small></b></div>
+              <div><span>Bài viết (AI đề xuất)</span><b>1,2 <small>/ 2</small></b></div>
+              <div><span>Tổng</span><b>7,7 <small>/ 10</small></b></div>
+            </div>
+            <div class="md-muc">
+              <h4>Bài viết của thí sinh <span class="mo">· 48 từ</span><span class="co-cam nho an" id="coLech"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4"/><path d="M12 17.5v.01"/></svg>2 lần AI chấm lệch nhau</span></h4>
+              <div class="bai-lam">Last Sunday I <u>go</u> to the city museum with my family. We <u>see</u> many old pictures and a big model of the city. I <u>am very interesting</u> in the history room. After that we <u>eat</u> lunch in a small café near the museum. It was a nice day.</div>
+            </div>
+            <div class="md-muc">
+              <h4>AI chấm 2 lần độc lập <span class="co-cam nho an" id="chipLech">Lệch 0,6 điểm</span></h4>
+              <div class="hai-luot">
+                <div class="luot cho" id="luot1"><b>Lần 1: 1,5 điểm</b><p>Đúng chủ đề, ý mạch lạc. Còn sai thì quá khứ ở vài động từ.</p></div>
+                <div class="luot cho" id="luot2"><b>Lần 2: 0,9 điểm</b><p>Nhiều lỗi thì quá khứ (go, see, eat); từ vựng còn đơn giản.</p></div>
+              </div>
+            </div>
+            <div class="md-muc">
+              <h4>Lỗi ngữ pháp AI phát hiện</h4>
+              <table class="bang-loi">
+                <tr><th>Thí sinh viết</th><th>Gợi ý sửa</th><th>Giải thích</th></tr>
+                <tr><td>I go</td><td>I went</td><td>Việc đã xảy ra → dùng quá khứ đơn</td></tr>
+                <tr><td>am very interesting</td><td>was very interested</td><td>Cảm thấy thích thú → "interested"</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="md-chan">
+            <div class="o-diem"><label>Điểm bài viết (0–2)</label><div class="o" id="oDiem">1,2</div></div>
+            <div class="o-ghi"><label>Ghi chú (tùy chọn)</label><div class="o mo">VD: đồng ý với AI</div></div>
+            <div class="nut-duyet" id="nutDuyet"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span id="chuDuyet">Duyệt bài</span><i class="gon" id="gonDuyet"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="minh-hoa nguon anim" style="--d:1.6s" data-qa-meta>Màn hình duyệt bài của giáo viên · dữ liệu minh họa</div>
+  <svg class="con-tro" id="conTro" viewBox="0 0 24 24" data-qa-allow-color aria-hidden="true"><path d="M4 2.5l15 9-6.6 1.6 3.7 7.1-2.8 1.4-3.7-7.2L4 19z" fill="#fff" stroke="#141A33" stroke-width="1.4" stroke-linejoin="round"/></svg>
+
+  <footer class="foot">
+    <div class="shop">Cổng thi trực tuyến · Trường Đại học Thành Đông</div>
+    <div class="so-trang">04 / 09</div>
+  </footer>
+  <div class="ph-badge">Chưa có ảnh nền · thả ảnh vào assets/s4.png</div>
+  <div class="credit">Hình nền tạo bằng AI</div>
+</div>
+<script src="deck/deck.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const dsLi = [...document.querySelectorAll('.nhip li')];
+let phien = 0;
+function datDuyet(xong){
+  $('nutDuyet').classList.toggle('xong', xong); $('chuDuyet').textContent = xong ? 'Đã duyệt' : 'Duyệt bài';
+  $('ttBai').classList.toggle('xong', xong); $('ttBai').textContent = xong ? 'Đã duyệt' : 'Đã chấm';
+}
+Deck.onStep((n, dir) => {
+  const p = ++phien, r = Deck.reduced;
+  dsLi.forEach((li, k) => { li.classList.toggle('qua', k < n - 1); li.classList.toggle('dang', k === n - 1); });
+  // nhịp 1: hai lượt AI sáng lên
+  ['luot1', 'luot2'].forEach(id => { $(id).classList.toggle('cho', n < 1); $(id).classList.toggle('sang', n === 1); $(id).classList.toggle('lech', n >= 2); });
+  // nhịp 2: cờ lệch hiện và nhấp nháy
+  ['coLech', 'chipLech'].forEach(id => { const el = $(id); el.classList.toggle('an', n < 2); el.classList.remove('nhay');
+    if (n === 2 && dir === 1 && !r) { void el.offsetWidth; el.classList.add('nhay'); } });
+  // nhịp 3: con trỏ của giáo viên tới nút "Duyệt bài" rồi bấm
+  const tro = $('conTro'), nut = $('nutDuyet');
+  $('oDiem').classList.toggle('dang', n >= 3);
+  tro.getAnimations().forEach(a => a.cancel());
+  if (n >= 3 && dir === 1 && !r) {
+    datDuyet(false);
+    const o = Deck.toStage(nut), x1 = o.x + o.w * .55, y1 = o.y + o.h * .45;
+    tro.style.opacity = 1;
+    Deck.track(tro.animate([{ transform: `translate(${x1 - 260}px,${y1 - 190}px)` }, { transform: `translate(${x1}px,${y1}px)` }],
+      { duration: 1000, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'forwards' }));
+    Deck.later(() => { if (p !== phien) return; const g = $('gonDuyet'); g.classList.remove('go'); void g.offsetWidth; g.classList.add('go'); datDuyet(true); }, 1150);
+  } else { tro.style.opacity = 0; datDuyet(n >= 3); }
+});
+</script>
+</body>
+</html>

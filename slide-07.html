@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slide 07 — Lộ trình</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="deck/deck.css" rel="stylesheet">
+<link href="deck/theme.css" rel="stylesheet">
+<link href="deck/tdu-v2.css" rel="stylesheet">
+<style>
+/* =========================================================
+   SLIDE 7 — LỘ TRÌNH · bố cục "thước đo & mốc" đặt dọc theo cầu thang nổi của ảnh · 3 NHỊP · cảm xúc: DÂNG
+   Ảnh s7: bậc thang nổi phát sáng đi từ (1020,770) lên góc phải trên (1880,165); 2/3 trái là tường bê tông trống.
+   Ba mốc nằm ngay trên mép bậc: Hôm nay (bậc đầu) → Trước khi thi thật → Giai đoạn 2. Nhãn đặt trên tường bên trái mỗi mốc.
+   Đường nối vẽ ra theo nhịp (stroke-dashoffset); chấm "đang ở đây" thở nhẹ ở mốc 1 (vi chuyển động duy nhất).
+   ========================================================= */
+.scrim{background:
+  linear-gradient(90deg,rgba(var(--bg-rgb),.5) 0%,rgba(var(--bg-rgb),.25) 45%,rgba(var(--bg-rgb),0) 60%),
+  radial-gradient(ellipse 34% 30% at 62% 40%,rgba(var(--bg-rgb),.45),rgba(var(--bg-rgb),0) 100%),
+  radial-gradient(ellipse 26% 20% at 78% 18%,rgba(var(--bg-rgb),.6),rgba(var(--bg-rgb),0) 100%),
+  radial-gradient(ellipse 24% 16% at 40% 70%,rgba(var(--bg-rgb),.5),rgba(var(--bg-rgb),0) 100%),
+  linear-gradient(180deg,rgba(var(--bg-rgb),.3) 0%,rgba(var(--bg-rgb),0) 22%,rgba(var(--bg-rgb),0) 82%,rgba(var(--bg-rgb),.5) 100%)}
+.copy{top:196px;width:900px}
+h1{font-size:88px;margin-top:30px}
+
+svg.duong-moc{position:absolute;inset:0;width:1920px;height:1080px;z-index:2;pointer-events:none;overflow:visible}
+.duong-moc .nen{fill:none;stroke:rgba(var(--fg-rgb),.22);stroke-width:2;stroke-dasharray:3 9}
+.duong-moc .doan{fill:none;stroke:var(--accent-hi);stroke-width:3;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:1;
+  transition:stroke-dashoffset var(--dur-3) var(--ease-out)}
+.duong-moc .doan.step-on{stroke-dashoffset:0}
+
+.moc{position:absolute;z-index:3;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;
+  background:var(--accent-hi);box-shadow:0 0 0 7px rgba(var(--accent-rgb),.3),0 0 26px rgba(var(--accent-hi-rgb),.8)}
+.moc.dang::after{content:"";position:absolute;inset:-7px;border-radius:50%;animation:live 2s ease-out infinite}
+.nhan-moc{position:absolute;z-index:3;text-align:right}
+.nhan-moc small{display:block;font-size:30px;font-weight:700;color:var(--accent-text);letter-spacing:.005em}
+.nhan-moc b{display:block;font-size:44px;font-weight:600;letter-spacing:-.015em;color:var(--ink-strong);margin-top:4px;white-space:nowrap}
+.nhan-moc span{display:block;font-size:28px;font-weight:500;color:var(--ink);margin-top:6px;white-space:nowrap}
+/* mốc 2, 3: đường nối đi chéo lên phải sát cuối dòng chi tiết → lùi dòng này 46px theo độ dốc, chữ không bị nét sáng cắt qua */
+.nhan-moc.theo-doc span{margin-right:46px}
+</style>
+</head>
+<body data-image="assets/s7.webp,assets/s7.png,assets/s6.webp">
+<div class="stage" id="stage">
+  <div class="bg">
+    <div class="bg-move">
+      <div class="bg-kb" style="--kb-origin:76% 44%">
+        <img id="bgImg" alt="">
+        <video id="bgVid" muted loop playsinline autoplay preload="auto"></video>
+      </div>
+    </div>
+  </div>
+  <div class="scrim"></div><div class="vignette"></div><div class="grain"></div>
+
+  <header class="brand">
+    <div class="org"><img src="assets/logo.png" alt="Logo Trường Đại học Thành Đông"><div class="org-text"><span>TRƯỜNG ĐẠI HỌC</span><strong>THÀNH ĐÔNG</strong></div></div>
+    <span class="vach"></span><span class="ten-cong">Cổng thi trực tuyến</span>
+  </header>
+
+  <section class="copy">
+    <div class="nhan anim" style="--d:.9s"><span class="tag">06 · Lộ trình</span></div>
+    <h1>
+      <span class="mask"><span class="line" style="--d:.2s">Hôm nay mới là</span></span>
+      <span class="mask"><span class="line" style="--d:.34s">chặng đầu.</span></span>
+    </h1>
+  </section>
+
+  <!-- Đường nối 3 mốc theo mép bậc thang: nét chấm mờ (cấu trúc) + đoạn sáng vẽ ra theo nhịp -->
+  <svg class="duong-moc" viewBox="0 0 1920 1080" aria-hidden="true">
+    <path class="nen" d="M1020 770 L1450 469 L1800 224"/>
+    <path class="doan" data-step="2" data-step-fx="none" pathLength="1" d="M1020 770 L1450 469"/>
+    <path class="doan" data-step="3" data-step-fx="none" pathLength="1" d="M1450 469 L1800 224"/>
+  </svg>
+
+  <!-- Mốc 1 · nhịp 1 -->
+  <div class="moc dang" data-step="1" data-step-fx="fade" style="left:1020px;top:770px"></div>
+  <div class="nhan-moc" data-step="1" style="right:952px;top:690px">
+    <small>Hôm nay</small><b>Bản chạy thử</b><span>Chạy trọn một vòng thi</span>
+  </div>
+  <!-- Mốc 2 · nhịp 2 -->
+  <div class="moc" data-step="2" data-step-fx="fade" style="left:1450px;top:469px"></div>
+  <div class="nhan-moc theo-doc" data-step="2" style="right:522px;top:388px">
+    <small>Trước khi thi thật</small><b>Hiệu chỉnh</b><span>Đối chiếu AI, chốt thang chấm, thi thử</span>
+  </div>
+  <!-- Mốc 3 · nhịp 3 -->
+  <div class="moc" data-step="3" data-step-fx="fade" style="left:1800px;top:224px"></div>
+  <div class="nhan-moc theo-doc" data-step="3" style="right:172px;top:144px">
+    <small>Giai đoạn 2</small><b>Mở rộng</b><span>TOEIC, tiếng Trung (HSK), thi Nói</span>
+  </div>
+
+  <footer class="foot">
+    <div class="shop">Cổng thi trực tuyến · Trường Đại học Thành Đông</div>
+    <div class="so-trang">07 / 09</div>
+  </footer>
+  <div class="ph-badge">Chưa có ảnh nền · thả ảnh vào assets/s7.png</div>
+  <div class="credit">Hình nền tạo bằng AI</div>
+</div>
+<script src="deck/deck.js"></script>
+</body>
+</html>

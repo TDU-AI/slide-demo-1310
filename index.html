@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--PUBLISH:HEAD-->
+<title>Cổng thi trực tuyến TDU</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="deck/theme.css" rel="stylesheet">
+<style>
+/* Bộ trình chiếu: các slide (iframe) chồng lên nhau, chuyển cảnh mờ dần. Giữ nguyên 2 dấu PUBLISH: build_publish.py dùng để tạo bản đăng Claude Artifact.
+   Màu và font lấy từ deck/theme.css (cùng phong cách với các slide). */
+:root{
+  --bg:rgb(var(--bg-rgb)); --muted:rgba(var(--muted-rgb),.74);
+  --accent:rgb(var(--accent-rgb)); --accent-hi:rgb(var(--accent-hi-rgb));
+  --glass:rgba(var(--surface-rgb),.74); --line:rgba(var(--fg-rgb),.2);
+}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);overflow:hidden;font-family:var(--font-body)}
+.deck{position:fixed;inset:0}
+.deck iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:var(--bg);opacity:0;transition:opacity .9s ease}
+.deck iframe.show{opacity:1}
+
+.hud{position:fixed;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;
+  background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transition:opacity .4s ease}
+.hud.on,.hud:focus-within,.hud:hover{opacity:1}
+.hud button{width:38px;height:38px;border:0;border-radius:50%;display:grid;place-items:center;background:transparent;color:var(--ink);cursor:pointer}
+.hud button:hover{background:rgba(var(--fg-rgb),.1)}
+.hud button:focus-visible{outline:2px solid var(--accent-hi);outline-offset:1px}
+.hud svg{width:18px;height:18px}
+.hud .pos{min-width:54px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+/* Chỉ báo nhịp bấm của slide đang chiếu (bộ trình chiếu tự tạo khi slide có data-step) */
+.hud .steps{display:flex;align-items:center;gap:5px;padding:0 6px 0 2px;font-size:12px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.hud .steps[hidden]{display:none}
+.hud .steps i{width:6px;height:6px;border-radius:50%;background:rgba(var(--fg-rgb),.24);transition:background .3s ease,transform .3s ease}
+.hud .steps i.on{background:var(--accent-hi)}
+.hud .steps i.now{transform:scale(1.35)}
+.bar{position:fixed;left:0;bottom:0;z-index:5;height:3px;width:0;background:linear-gradient(90deg,var(--accent-hi),var(--accent));transition:width .6s ease}
+.hint{position:fixed;left:50%;bottom:calc(66px + env(safe-area-inset-bottom,0px));z-index:5;max-width:calc(100% - 32px);transform:translateX(-50%);
+  padding:9px 16px;border-radius:999px;background:var(--glass);border:1px solid var(--line);font-size:13px;color:var(--muted);text-align:center;transition:opacity .8s ease}
+.hint b{color:var(--ink);font-weight:700}
+.hint.gone{opacity:0;pointer-events:none}
+.hint .phone{display:none}
+@media (orientation:portrait) and (max-width:760px){ .hint .desk{display:none} .hint .phone{display:inline} }
+@media (prefers-reduced-motion:reduce){ .deck iframe,.hud .steps i{transition:none} }
+</style>
+<!--/PUBLISH:HEAD-->
+</head>
+<body>
+<!--PUBLISH:BODY-->
+<div class="deck" id="deck"></div>
+
+<div class="hud" id="hud">
+  <button id="prev" type="button" aria-label="Lùi (nhịp hoặc slide trước)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <span class="pos" id="pos">1 / 1</span>
+  <button id="next" type="button" aria-label="Tiếp (nhịp hoặc slide sau)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button id="fs" type="button" aria-label="Toàn màn hình"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+<div class="bar" id="bar"></div>
+<div class="hint" id="hint">
+  <span class="desk">Bấm <b>→</b> hoặc nhấn vào slide để chuyển · <b>F</b> toàn màn hình · <b>R</b> xem lại hiệu ứng</span>
+  <span class="phone">Xoay ngang điện thoại để xem rõ hơn · <b>vuốt</b> hoặc chạm để chuyển slide</span>
+</div>
+
+<script>
+// Danh sách slide theo thứ tự trình chiếu (new_deck.py điền sẵn; thêm/bớt tại đây)
+const SLIDES = ['slide-01.html', 'slide-02.html', 'slide-03.html', 'slide-04.html', 'slide-05.html', 'slide-06.html', 'slide-07.html', 'slide-08.html', 'slide-09.html'];
+const deck = document.getElementById('deck'), hud = document.getElementById('hud'), hint = document.getElementById('hint');
+const pos = document.getElementById('pos'), bar = document.getElementById('bar');
+const WAIT = 1500;   // slide chưa báo "sẵn sàng" sau 1,5 giây → bộ trình chiếu tự đổi slide, không chờ nữa
+
+// Nạp sẵn mọi slide; slide nào chưa tới lượt thì ẩn hẳn (không tốn sức vẽ)
+const frames = SLIDES.map((src, i) => {
+  const f = document.createElement('iframe');
+  f.src = src + '#embed'; f.title = 'Slide ' + (i + 1); f.hidden = true;
+  f.setAttribute('allow', 'autoplay; fullscreen');
+  deck.appendChild(f);
+  return f;
+});
+// Trạng thái từng slide: đã sẵn sàng chưa · hiểu nhịp bấm không (deck.js v2) · tổng số nhịp · nhịp đang ở
+const state = SLIDES.map(() => ({ ready: false, v2: false, steps: 0, step: 0 }));
+let cur = -1, z = 1, hideTimer = 0, shownAt = 0, entryEnd = false, queued = 0, qTimer = 0, dotsEl = null;
+
+const post = (i, msg) => { try { frames[i].contentWindow.postMessage(msg, '*'); } catch (e) {} };
+function start(i, end){ post(i, end ? { deck: 'play', end: true } : { deck: 'play' }); }
+
+// Hiện "slide x / N", chỉ báo nhịp (khi slide có nhịp) và thanh tiến độ (tính cả nhịp)
+function paint(){
+  const s = state[cur], N = SLIDES.length;
+  pos.textContent = (cur + 1) + ' / ' + N;
+  bar.style.width = ((cur + (s.steps ? (s.step + 1) / (s.steps + 1) : 1)) / N * 100) + '%';
+  if (!s.steps && !dotsEl) return;
+  if (!dotsEl) {
+    dotsEl = document.createElement('span'); dotsEl.className = 'steps'; dotsEl.id = 'steps';
+    hud.insertBefore(dotsEl, document.getElementById('next'));
+  }
+  dotsEl.hidden = !s.steps;
+  if (!s.steps) return;
+  dotsEl.title = 'Nhịp ' + s.step + ' / ' + s.steps;
+  dotsEl.setAttribute('aria-label', dotsEl.title);
+  if (s.steps > 8) { dotsEl.textContent = s.step + '/' + s.steps; return; }
+  dotsEl.innerHTML = Array.from({ length: s.steps }, (_, k) =>
+    '<i class="' + (k < s.step ? 'on' : '') + (k === s.step - 1 ? ' now' : '') + '"></i>').join('');
+}
+
+// Đổi slide. end = vào theo chiều lùi → slide hiện sẵn mọi nhịp
+function go(n, end){
+  n = Math.max(0, Math.min(SLIDES.length - 1, n));
+  if (n === cur) return;
+  const prev = frames[cur], next = frames[n], e = !!end;
+  cur = n; entryEnd = e; shownAt = performance.now(); queued = 0; clearTimeout(qTimer);
+  state[n].step = e ? state[n].steps : 0;
+  next.hidden = false; next.classList.remove('show'); next.style.zIndex = ++z;
+  void next.offsetWidth;
+  next.classList.add('show');
+  if (state[n].ready) requestAnimationFrame(() => start(n, e));
+  if (prev) setTimeout(() => {
+    if (frames[cur] !== prev) { prev.classList.remove('show'); prev.hidden = true; post(frames.indexOf(prev), { deck: 'hide' }); }
+  }, 950);
+  paint();
+  try { history.replaceState(null, '', '#' + (n + 1)); } catch (err) {}
+  if (state[n].ready) next.focus();
+  else if (document.activeElement && document.activeElement.tagName === 'IFRAME') document.activeElement.blur();   // phím quay về bộ trình chiếu
+}
+
+// Tiến/lùi: chuyển cho slide xử lý theo nhịp (slide hết nhịp sẽ xin đổi slide).
+// skip = bỏ qua nhịp. Slide cũ (không hiểu nhịp) hoặc chưa sẵn sàng sau 1,5 giây → đổi slide luôn.
+function nav(dir, skip){
+  const s = state[cur];
+  if (skip) return go(cur + dir, dir < 0);
+  if (s.v2) return post(cur, { deck: 'key', dir });
+  const waited = performance.now() - shownAt;
+  if (s.ready || waited >= WAIT) return go(cur + dir, dir < 0);
+  queued = dir; clearTimeout(qTimer); qTimer = setTimeout(flush, WAIT - waited);   // chờ slide sẵn sàng
+}
+function flush(){ clearTimeout(qTimer); const d = queued; queued = 0; if (d) nav(d); }
+
+function toggleFs(){
+  const p = document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  if (p && p.catch) p.catch(() => {});
+}
+function showHud(){ hud.classList.add('on'); clearTimeout(hideTimer); hideTimer = setTimeout(() => hud.classList.remove('on'), 2500); }
+
+// Tin nhắn từ các slide: sẵn sàng / nhịp / đổi slide / nhảy đầu-cuối / toàn màn hình / rê chuột
+addEventListener('message', e => {
+  const d = e.data, i = frames.findIndex(f => f.contentWindow === e.source);
+  if (!d || d.deck !== 1 || i < 0) return;
+  const s = state[i];
+  if (d.steps != null) s.steps = +d.steps || 0;
+  if (d.step != null) s.step = +d.step || 0;
+  if (d.ready) {
+    s.ready = true; s.v2 = d.v >= 2;
+    if (i === cur) { start(i, entryEnd); frames[i].focus(); if (queued) flush(); }
+  }
+  if (i === cur && (d.ready || d.step != null)) paint();
+  if (d.nav && i === cur) go(cur + d.nav, d.nav < 0);
+  if (d.jump != null && i === cur) go(d.jump < 0 ? SLIDES.length - 1 : d.jump);
+  if (d.fs) toggleFs();
+  if (d.move) showHud();
+});
+
+// Phím khi bộ trình chiếu đang giữ tiêu điểm (vd sau khi bấm nút ‹ ›). Phím bấm trong slide do slide tự xử lý.
+const NEXT = ['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'], PREV = ['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'];
+addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.target.closest && e.target.closest('button') && (e.key === ' ' || e.key === 'Enter')) return;
+  const k = e.key;
+  if (NEXT.includes(k)) { e.preventDefault(); nav(1, e.shiftKey); }        // Shift + → : bỏ qua nhịp, sang slide sau
+  else if (PREV.includes(k)) { e.preventDefault(); nav(-1, e.shiftKey); }
+  else if (k === 'Home') { e.preventDefault(); go(0); }
+  else if (k === 'End') { e.preventDefault(); go(SLIDES.length - 1); }
+  else if (k === 'f' || k === 'F') toggleFs();
+  else if (k === 'r' || k === 'R') start(cur);
+});
+addEventListener('mousemove', showHud);
+// Bấm chuột vào slide lỗi/chưa sẵn sàng (thiếu file, thiếu deck.js) → tiêu điểm kẹt trong iframe, phím không tới đâu
+// → trả tiêu điểm về bộ trình chiếu (phím ← → vẫn đổi slide theo cách chờ 1,5 giây ở trên); slide đã lỗi quá 1,5 giây thì cú bấm = tiến
+addEventListener('blur', () => setTimeout(() => {
+  const i = frames.indexOf(document.activeElement);
+  if (i < 0 || state[i].ready) return;
+  frames[i].blur();
+  if (i === cur && performance.now() - shownAt >= WAIT) nav(1);
+}, 0));
+document.getElementById('prev').addEventListener('click', () => nav(-1));
+document.getElementById('next').addEventListener('click', () => nav(1));
+document.getElementById('fs').addEventListener('click', toggleFs);
+setTimeout(() => hint.classList.add('gone'), 6000);
+
+// Mở đúng slide nếu link có #2, #3…
+const fromHash = () => { const m = /^#(\d{1,2})$/.exec(location.hash); return m ? +m[1] - 1 : 0; };
+addEventListener('hashchange', () => go(fromHash()));
+go(fromHash());
+showHud();
+</script>
+<!--/PUBLISH:BODY-->
+</body>
+</html>

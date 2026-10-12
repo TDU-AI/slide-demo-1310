@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slide 01 — Bìa</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="deck/deck.css" rel="stylesheet">
+<link href="deck/theme.css" rel="stylesheet">
+<link href="deck/tdu-v2.css" rel="stylesheet">
+<link href="deck/dien-thoai-tdu.css" rel="stylesheet">
+<style>
+/* =========================================================
+   SLIDE 1 — BÌA · bản đồ khoảng trống S2 (chữ trái · sản phẩm phải) · WOW 1: giao diện thi thật trồi lên rồi "sống"
+   Ảnh s1: hành lang giảng đường về đêm — tường tối trái 0–51% (chữ), điểm tụ sáng ~66% ngang (không che), điện thoại đặt bên phải điểm tụ.
+   Thứ tự vào cảnh (v2): tiêu đề (neo) → câu phụ → điện thoại → 2 nhãn nổi. Thương hiệu đứng yên.
+   ========================================================= */
+.scrim{background:
+  linear-gradient(90deg,rgba(var(--bg-rgb),.5) 0%,rgba(var(--bg-rgb),.25) 42%,rgba(var(--bg-rgb),0) 56%),
+  linear-gradient(180deg,rgba(var(--bg-rgb),.35) 0%,rgba(var(--bg-rgb),0) 20%,rgba(var(--bg-rgb),0) 74%,rgba(var(--bg-rgb),.55) 100%)}
+.copy{top:236px;width:1000px}
+h1{font-size:136px;line-height:1.08;letter-spacing:-.03em;margin-top:40px}
+.sub{margin-top:44px;font-size:38px;line-height:1.4;font-weight:500;max-width:880px;color:var(--muted)}
+.sub b{font-weight:600}
+
+/* người trình bày — góc dưới trái (chữ phụ trợ) */
+.trinh-bay{position:absolute;left:var(--margin);bottom:70px;z-index:2;display:flex;gap:22px}
+.trinh-bay::before{content:"";flex:none;width:4px;border-radius:2px;background:var(--accent)}
+.trinh-bay small{display:block;font-size:18px;font-weight:600;letter-spacing:.18em;color:var(--muted)}
+.trinh-bay b{display:block;font-size:32px;font-weight:600;color:var(--ink-strong);margin-top:6px}
+.trinh-bay span{display:block;font-size:24px;color:var(--muted);margin-top:2px}
+
+/* điện thoại: trang làm bài thật — trồi lên và lấy nét (chữ ký chuyển động của saas-dark) */
+.dt-wrap{left:1318px;top:104px;width:418px;height:872px}
+.dt-wrap .device-float{animation:none}
+.play .dt-wrap .device{animation:traiLen 1.2s var(--ease-out) 1s both}
+@keyframes traiLen{from{opacity:0;transform:perspective(1600px) translateY(90px) rotateX(8deg);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+
+/* hai nhãn nổi — lợi ích then chốt (thẻ đặc E2) */
+.noi{position:absolute;z-index:4;display:flex;align-items:center;gap:16px;padding:16px 26px 16px 16px;opacity:0}
+.noi b{font-size:26px;font-weight:600;color:var(--ink-strong);white-space:nowrap}
+.noi .bieu{width:48px;height:48px;flex:none;border-radius:calc(14px * var(--round));display:grid;place-items:center}
+.noi .bieu svg{width:26px;height:26px}
+.noi-luu{left:892px;top:206px}
+.noi-luu .bieu{background:rgba(var(--ok-rgb),.18);color:var(--ok)}
+.noi-thu{left:936px;top:858px}
+.noi-thu .bieu{background:rgba(var(--accent-rgb),.3);color:var(--accent-hi)}
+.play .noi-luu{animation:toastIn .9s var(--ease-out) 4.5s both}
+.play .noi-thu{animation:toastIn .9s var(--ease-out) 5.3s both}
+</style>
+</head>
+<body data-image="assets/s1.webp,assets/s1.png">
+<div class="stage" id="stage">
+
+  <div class="bg">
+    <div class="bg-move">
+      <div class="bg-kb" style="--kb-origin:66% 54%">
+        <img id="bgImg" alt="">
+        <video id="bgVid" muted loop playsinline autoplay preload="auto"></video>
+      </div>
+    </div>
+  </div>
+  <div class="scrim"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+
+  <header class="brand">
+    <div class="org"><img src="assets/logo.png" alt="Logo Trường Đại học Thành Đông"><div class="org-text"><span>TRƯỜNG ĐẠI HỌC</span><strong>THÀNH ĐÔNG</strong></div></div>
+  </header>
+
+  <section class="copy">
+    <div class="nhan anim" style="--d:.9s"><span class="tag">Bản chạy thử · Trình diễn 13/10/2026</span></div>
+    <h1>
+      <span class="mask"><span class="line" style="--d:.2s">Cổng thi</span></span>
+      <span class="mask"><span class="line hl" style="--d:.36s">trực tuyến<span class="cham-do">.</span></span></span>
+    </h1>
+    <p class="sub anim" style="--d:.75s">Thi trên điện thoại. AI chấm sơ bộ.<br><b>Giáo viên quyết định.</b></p>
+  </section>
+
+  <div class="trinh-bay anim" style="--d:1.4s" data-qa-meta>
+    <div><small>NGƯỜI TRÌNH BÀY</small><b>Lê Anh Tuấn</b><span>Trung tâm Ứng dụng Trí tuệ nhân tạo (A.I)</span></div>
+  </div>
+
+  <!-- ĐIỆN THOẠI: trang làm bài thật (tacb_exam.html), phần Nghe — màu bên trong là màu thật của hệ thống -->
+  <div class="device-wrap dt-wrap">
+    <div class="device-float">
+      <div class="device dt" data-qa-ui data-qa-allow-color data-fx="sweep" data-fx-opts='{"every":0,"delay":2500,"alpha":0.3,"width":260}'>
+        <div class="dt-man">
+          <div class="dt-tt"><span>08:41</span><span class="dt-dao"></span>
+            <span class="dt-pin"><svg width="18" height="12" viewBox="0 0 18 12" fill="#141A33"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg width="26" height="13" viewBox="0 0 26 13" fill="none"><rect x=".5" y=".5" width="22" height="12" rx="3.5" stroke="#141A33" opacity=".45"/><rect x="2.5" y="2.5" width="16" height="8" rx="2" fill="#141A33"/></svg></span></div>
+          <div class="dt-dau">
+            <div class="dt-hang"><img src="assets/logo.png" alt="">
+              <div class="dt-ten"><b>Tiếng Anh cơ bản 1</b><span>Nguyễn Văn A · SBD 0123</span></div>
+              <div class="dt-gio"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M10 2h4"/></svg><span id="dtGio">18:42</span></div>
+            </div>
+            <div>
+              <div class="dt-tien"><span>Đã làm <b id="dtDa">12</b>/40 câu</span><span class="dt-luu" id="dtLuu"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><em style="font-style:normal" id="dtLuuChu">Bài làm tự lưu 30 giây/lần</em></span></div>
+              <div class="dt-thanh"><i id="dtThanh"></i></div>
+            </div>
+            <div class="dt-tab"><span class="dang">Nghe<small id="dtNghe">4/10</small></span><span>Ngôn ngữ<small>8/10</small></span><span>Đọc<small>0/12</small></span><span>Viết<small>0/8</small></span></div>
+          </div>
+          <div class="dt-than">
+            <h3>I. Phần Nghe</h3>
+            <div class="dt-the">
+              <div class="dt-nghe"><span>File nghe · Part 1</span><span class="dt-chip">Đã nghe 1/2 lần</span></div>
+              <div class="dt-play"><span class="dt-nut"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></span>
+                <div class="dt-chay"><i><b></b></i><span><em style="font-style:normal">0:42</em><em style="font-style:normal">2:15</em></span></div></div>
+            </div>
+            <div class="dt-huong"><b>Part 1.</b> Listen and choose the correct picture (A, B or C).</div>
+            <div class="dt-the">
+              <div class="dt-cau"><span class="dt-so">Câu 1</span><span>What time does the museum open on Sunday?</span></div>
+              <div class="dt-chon">
+                <span><svg width="62" height="62" viewBox="0 0 72 72" fill="none" stroke="#1F2A5E" stroke-linecap="round"><circle cx="36" cy="36" r="30" stroke-width="3" fill="#fff"/><path d="M36 9v4M63 36h-4M36 63v-4M9 36h4" stroke-width="2.5"/><path d="M36 36V14" stroke-width="3"/><path d="M36 36L23 43.5" stroke-width="4.5"/><circle cx="36" cy="36" r="2.5" fill="#1F2A5E" stroke="none"/></svg>A</span>
+                <span id="dtB"><svg width="62" height="62" viewBox="0 0 72 72" fill="none" stroke="#1F2A5E" stroke-linecap="round"><circle cx="36" cy="36" r="30" stroke-width="3" fill="#fff"/><path d="M36 9v4M63 36h-4M36 63v-4M9 36h4" stroke-width="2.5"/><path d="M36 36V58" stroke-width="3"/><path d="M36 36L21.5 32.1" stroke-width="4.5"/><circle cx="36" cy="36" r="2.5" fill="#1F2A5E" stroke="none"/></svg>B<span class="dt-tich"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><i class="dt-cham-tay" id="dtCham"></i></span>
+                <span><svg width="62" height="62" viewBox="0 0 72 72" fill="none" stroke="#1F2A5E" stroke-linecap="round"><circle cx="36" cy="36" r="30" stroke-width="3" fill="#fff"/><path d="M36 9v4M63 36h-4M36 63v-4M9 36h4" stroke-width="2.5"/><path d="M36 36H58" stroke-width="3"/><path d="M36 36L24.1 26.9" stroke-width="4.5"/><circle cx="36" cy="36" r="2.5" fill="#1F2A5E" stroke="none"/></svg>C</span>
+              </div>
+            </div>
+            <div class="dt-the">
+              <div class="dt-cau"><span class="dt-so">Câu 2</span><span>How does the woman usually get to work?</span></div>
+              <div class="dt-chon"><span style="min-height:96px"></span><span style="min-height:96px"></span><span style="min-height:96px"></span></div>
+            </div>
+          </div>
+          <div class="dt-day"><div><b id="dtCon">Còn 28 câu chưa làm</b><small>Bài làm tự lưu 30 giây một lần</small></div><span class="dt-nop">Nộp bài</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="noi noi-luu the">
+    <span class="bieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    <b>Tự lưu 30 giây một lần</b>
+  </div>
+  <div class="noi noi-thu the">
+    <span class="bieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></span>
+    <b>Điểm gửi qua email</b>
+  </div>
+
+  <div class="ph-badge">Chưa có ảnh nền · thả ảnh vào assets/s1.png</div>
+  <div class="credit">Hình nền tạo bằng AI</div>
+</div>
+
+<script src="deck/deck.js"></script>
+<script src="deck/fx/fx-core.js"></script>
+<script src="deck/fx/ambient.js"></script>
+<script>
+// Câu chuyện nhỏ trong điện thoại (khớp trang thi thật):
+// 3s chạm chọn đáp án B → 12→13 câu, tab Nghe 4→5, thanh tiến độ dài ra · 4,2s "Đã lưu lúc 08:41" · đồng hồ đếm lùi từng giây
+const $ = id => document.getElementById(id);
+let giay = 18 * 60 + 42;
+const veGio = () => { $('dtGio').textContent = String(Math.floor(giay / 60)).padStart(2, '0') + ':' + String(giay % 60).padStart(2, '0'); };
+function demLui(){ giay = Math.max(0, giay - 1); veGio(); Deck.later(demLui, 1000); }
+Deck.onPlay(() => {
+  const r = Deck.reduced;
+  giay = 18 * 60 + 42; veGio();
+  $('dtB').classList.remove('chon'); $('dtCham').classList.remove('go');
+  $('dtDa').textContent = '12'; $('dtNghe').textContent = '4/10'; $('dtCon').textContent = 'Còn 28 câu chưa làm';
+  $('dtThanh').style.width = '30%';
+  $('dtLuu').classList.remove('tot'); $('dtLuuChu').textContent = 'Bài làm tự lưu 30 giây/lần';
+  if (!r) Deck.later(demLui, 1300);
+  Deck.later(() => {
+    if (!r) $('dtCham').classList.add('go');
+    $('dtB').classList.add('chon');
+    $('dtDa').textContent = '13'; $('dtNghe').textContent = '5/10'; $('dtCon').textContent = 'Còn 27 câu chưa làm';
+    $('dtThanh').style.width = '32.5%';
+  }, r ? 0 : 3000);
+  Deck.later(() => { $('dtLuu').classList.add('tot'); $('dtLuuChu').textContent = 'Đã lưu lúc 08:41'; }, r ? 0 : 4200);
+});
+</script>
+</body>
+</html>
