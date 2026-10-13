@@ -1,0 +1,155 @@
+@import url("../fonts/fonts.css");
+
+:root {
+  --nen: #f4f6fb;
+  --the: #ffffff;
+  --chu: #1b2440;
+  --chu-phu: #4f5b78;
+  --vien: #dde3ef;
+  --xanh-dam: #1b2a5a;
+  --xanh: #2f6fb0;
+  --xanh-nhat: #e7f0fa;
+  --do: #c8102e;
+  --bong: 0 1px 2px rgba(20, 30, 60, .06), 0 6px 20px rgba(20, 30, 60, .06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --nen: #0d1326;
+    --the: #151d36;
+    --chu: #e8ecf6;
+    --chu-phu: #a9b3cc;
+    --vien: #26304d;
+    --xanh-dam: #0a1020;
+    --xanh: #8cc8f2;
+    --xanh-nhat: #1a2a48;
+    --bong: none;
+  }
+}
+:root[data-theme="dark"] {
+  --nen: #0d1326;
+  --the: #151d36;
+  --chu: #e8ecf6;
+  --chu-phu: #a9b3cc;
+  --vien: #26304d;
+  --xanh-dam: #0a1020;
+  --xanh: #8cc8f2;
+  --xanh-nhat: #1a2a48;
+  --bong: none;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--nen);
+  color: var(--chu);
+  font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+a { color: var(--xanh); text-underline-offset: 3px; }
+
+.dau {
+  background: var(--xanh-dam);
+  color: #fff;
+  padding: 18px 16px;
+}
+.dau-trong {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.dau img { width: 48px; height: 48px; border-radius: 50%; background: #fff; flex: none; }
+.dau .ten { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+.dau .ten-lon { font-weight: 700; font-size: 17px; }
+.dau .ve { margin-left: auto; color: #cfe6fb; font-size: 15px; white-space: nowrap; }
+
+.trong { max-width: 960px; margin: 0 auto; padding: 28px 16px 56px; }
+
+/* Trang mục lục */
+.mo-dau h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.2; margin: 6px 0 10px; }
+.mo-dau p { color: var(--chu-phu); margin: 0 0 6px; max-width: 46em; }
+.nhan {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--xanh);
+  background: var(--xanh-nhat);
+  border-radius: 999px;
+  padding: 3px 12px;
+}
+.muc { margin-top: 34px; }
+.muc > h2 { font-size: 20px; margin: 0 0 12px; }
+.luoi { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.the {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--the);
+  border: 1px solid var(--vien);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--bong);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .15s, transform .15s;
+}
+a.the:hover { border-color: var(--xanh); transform: translateY(-2px); }
+.the h3 { margin: 0; font-size: 18px; color: var(--chu); }
+.the p { margin: 0; color: var(--chu-phu); font-size: 15px; }
+.the .di { margin-top: auto; padding-top: 8px; font-weight: 600; color: var(--xanh); font-size: 15px; }
+.ghi-chu { font-size: 14px; color: var(--chu-phu); margin-top: 10px; }
+
+/* Trang hướng dẫn */
+.bai {
+  background: var(--the);
+  border: 1px solid var(--vien);
+  border-radius: 16px;
+  padding: clamp(20px, 4vw, 40px);
+  box-shadow: var(--bong);
+}
+.bai h1 { font-size: clamp(26px, 4.5vw, 34px); line-height: 1.25; margin: 0 0 6px; }
+.bai h1 + p em { color: var(--chu-phu); }
+.bai h2 {
+  font-size: 22px;
+  margin: 34px 0 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--vien);
+}
+.bai h3 { font-size: 18px; margin: 24px 0 8px; }
+.bai ul, .bai ol { padding-left: 1.4em; }
+.bai li { margin: 4px 0; }
+.bai blockquote {
+  margin: 16px 0;
+  padding: 10px 16px;
+  border-left: 4px solid var(--xanh);
+  background: var(--xanh-nhat);
+  border-radius: 0 10px 10px 0;
+}
+.bai blockquote p { margin: 6px 0; }
+.bang { overflow-x: auto; margin: 14px 0; }
+.bai table { border-collapse: collapse; width: 100%; font-size: 15px; }
+.bai th, .bai td { border: 1px solid var(--vien); padding: 8px 10px; text-align: left; vertical-align: top; }
+.bai th { background: var(--xanh-nhat); }
+.bai code { font-size: .92em; background: var(--xanh-nhat); padding: 1px 5px; border-radius: 5px; overflow-wrap: anywhere; }
+
+.chan {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+  color: var(--chu-phu);
+  font-size: 14px;
+}
+
+@media (max-width: 520px) {
+  body { font-size: 16px; }
+  .dau .ve { font-size: 14px; }
+  .dau .ten { display: none; }
+}
+@media print {
+  .dau, .chan { display: none; }
+  body { background: #fff; }
+  .bai { border: 0; box-shadow: none; padding: 0; }
+}
